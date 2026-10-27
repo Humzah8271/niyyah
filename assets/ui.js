@@ -20,7 +20,7 @@ addEventListener('pageshow', e => { if (e.persisted && window.NIYYAH_LEAVING) { 
   const near = e => { const a = e.target.closest && e.target.closest('a[href]'); if (a && !a.target) fetchPage(a.href); };
   document.addEventListener('pointerover', near, { passive: true }); document.addEventListener('touchstart', near, { passive: true });
   const idle = window.requestIdleCallback || (f => setTimeout(f, 1500));
-  addEventListener('load', () => idle(() => document.querySelectorAll('.nav a[href$=".html"], .next-page a').forEach(a => fetchPage(a.href))));
+  addEventListener('load', () => idle(() => document.querySelectorAll('.nav a, .next-page a').forEach(a => fetchPage(a.href))));
 })();
 (() => {
   const bar = document.querySelector('.progress');
