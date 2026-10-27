@@ -5,7 +5,13 @@ const fine = matchMedia('(pointer: fine)').matches;
 /* every page opens at the top, unless the link points at a section (#faq) */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 const toTop = () => { if (!location.hash) { document.documentElement.style.scrollBehavior = 'auto'; scrollTo(0, 0); document.documentElement.style.scrollBehavior = ''; } };
-toTop(); addEventListener('DOMContentLoaded', toTop); addEventListener('load', () => setTimeout(toTop, 0)); addEventListener('pageshow', toTop);
+toTop(); addEventListener('DOMContentLoaded', toTop);
+/* the moment a link to another page is pressed, stop every animation so the browser can switch pages straight away */
+document.addEventListener('click', e => {
+  const a = e.target.closest && e.target.closest('a[href]'); if (!a || a.target === '_blank' || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  const u = new URL(a.href, location.href); if (u.origin === location.origin && u.pathname !== location.pathname) window.NIYYAH_LEAVING = true;
+}, true);
+addEventListener('pageshow', e => { if (e.persisted && window.NIYYAH_LEAVING) { window.NIYYAH_LEAVING = false; location.reload(); } }); addEventListener('load', () => setTimeout(toTop, 0)); addEventListener('pageshow', toTop);
 (() => {
   const bar = document.querySelector('.progress');
   let ticking = false;

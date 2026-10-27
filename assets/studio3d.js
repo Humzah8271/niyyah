@@ -19,7 +19,7 @@
   let renderer;
   try { renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' }); }
   catch (e) { host.classList.add('no3d'); return; }
-  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.75));
+  renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 1.25));
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.physicallyCorrectLights = false;
   host.prepend(renderer.domElement);
@@ -115,8 +115,11 @@
   let yaw = REST.mug.yaw, pitch = REST.mug.pitch, vy = 0, vp = 0, drag = false, lx = 0, ly = 0, t = 0, last = performance.now(), visible = true, raf = 0, settled = 0;
   const K = 46, DAMP = 7.2; // stiffness and damping, slightly under-damped for a small overshoot
   function size() { const w = host.clientWidth, h = host.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); }
+  let lastDraw = 0;
   function frame(now) {
-    raf = 0; const dt = Math.min(.033, (now - last) / 1000); last = now; t += dt;
+    raf = 0; if (window.NIYYAH_LEAVING) return;
+    if (now - lastDraw < 32 && !drag) { if (visible && !document.hidden) raf = requestAnimationFrame(frame); return; }
+    lastDraw = now; const dt = Math.min(.033, (now - last) / 1000); last = now; t += dt;
     const rest = REST[current], obj = current === 'mug' ? mug : tote;
     if (!drag) {
       const ty = rest.yaw + (reduce ? 0 : Math.sin(t * .6) * .05), tp = rest.pitch;
@@ -125,7 +128,7 @@
     }
     obj.rotation.set(pitch, yaw, 0, 'XYZ');
     obj.position.y = (current === 'mug' ? -.2 : -.35) + (reduce ? 0 : Math.sin(t * 1.4) * .035);
-    shadow.scale.x = current === 'mug' ? .8 : 1;
+    shadow.scale.x = current === 'mug' ? .8 : 1; shadow.position.y = current === 'mug' ? -1.42 : -1.8;
     renderer.render(scene, camera);
     const moving = drag || Math.abs(vy) + Math.abs(vp) > .002 || !reduce;
     if (visible && !document.hidden && moving) raf = requestAnimationFrame(frame);

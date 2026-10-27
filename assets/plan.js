@@ -38,28 +38,37 @@
   // ----- example dates on the slides -----
   document.querySelectorAll('[data-offset]').forEach(el => { const d = new Date(); d.setDate(d.getDate() + +el.dataset.offset); el.textContent = fmt(d); });
 
-  // ----- slideshow -----
+  // ----- slideshow: moves on by itself; a thin bar along the bottom fills up, then the next slide comes in -----
   const deck = document.getElementById('deck');
   if (deck) {
     const track = deck.querySelector('.track'), slides = [...deck.querySelectorAll('.slide')], dots = [...deck.querySelectorAll('.dot')];
+    const bar = deck.querySelector('.timer i');
     const prev = deck.querySelector('[data-prev]'), next = deck.querySelector('[data-next]');
-    let i = 0, auto = !reduce, timer = 0;
-    function go(n, user) {
-      i = (n + slides.length) % slides.length;
+    const DUR = 10000;
+    let i = 0, elapsed = 0, last = 0, hover = false, onScreen = false;
+    function go(n) {
+      i = (n + slides.length) % slides.length; elapsed = 0;
       track.style.transform = `translateX(${-100 * i}%)`;
       slides.forEach((s, k) => { s.setAttribute('aria-hidden', k !== i); s.inert = k !== i; });
       dots.forEach((d, k) => d.setAttribute('aria-current', k === i));
-      if (user) { auto = false; clearTimeout(timer); }
-      else schedule();
+      bar.style.transform = 'scaleX(0)';
     }
-    function schedule() { clearTimeout(timer); if (auto) timer = setTimeout(() => go(i + 1), 9000); }
-    prev.addEventListener('click', () => go(i - 1, true)); next.addEventListener('click', () => go(i + 1, true));
-    dots.forEach((d, k) => d.addEventListener('click', () => go(k, true)));
-    deck.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1, true); if (e.key === 'ArrowRight') go(i + 1, true); });
+    function tick(now) {
+      const dt = last ? now - last : 0; last = now;
+      if (onScreen && !hover && !document.hidden) {
+        elapsed += Math.min(dt, 100);
+        bar.style.transform = `scaleX(${Math.min(1, elapsed / DUR)})`;
+        if (elapsed >= DUR) go(i + 1);
+      }
+      requestAnimationFrame(tick);
+    }
+    prev.addEventListener('click', () => go(i - 1)); next.addEventListener('click', () => go(i + 1));
+    dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
+    deck.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
     let sx = null; track.addEventListener('pointerdown', e => { sx = e.clientX; });
-    track.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) go(i + (e.clientX < sx ? 1 : -1), true); sx = null; });
-    deck.addEventListener('pointerenter', () => clearTimeout(timer)); deck.addEventListener('pointerleave', schedule);
-    new IntersectionObserver(es => { if (es[0].isIntersecting) schedule(); else clearTimeout(timer); }).observe(deck);
-    go(0);
+    track.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) go(i + (e.clientX < sx ? 1 : -1)); sx = null; });
+    if (fine) { deck.addEventListener('pointerenter', () => { hover = true; }); deck.addEventListener('pointerleave', () => { hover = false; }); }
+    new IntersectionObserver(es => { onScreen = es[0].isIntersecting; }, { threshold: .35 }).observe(deck);
+    go(0); requestAnimationFrame(tick);
   }
 })();

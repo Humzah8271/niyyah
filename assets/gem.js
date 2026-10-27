@@ -32,7 +32,8 @@ float fRing(vec3 p){float d=length(vec2(length(p.xy)-.86,p.z))-.07;
 float form(vec3 p,float k){if(k<.5)return fCrescent(p);if(k<1.5)return fStar(p);if(k<2.5)return fRosette(p);return fRing(p);}
 float scene(vec3 p){float k=floor(morph);float t=fract(morph);t=t*t*(3.-2.*t);return mix(form(p,mod(k,4.)),form(p,mod(k+1.,4.)),t);}
 void main(){vec2 uv=(gl_FragCoord.xy-.5*res)/res.y;vec3 ro=rot*vec3(0.,0.,4.4);vec3 rd=rot*normalize(vec3(uv*2.7,-4.4));
-float t=0.;bool hit=false;float d;for(int i=0;i<72;i++){vec3 p=ro+rd*t;d=scene(p);if(d<.0015){hit=true;break;}t+=d*.85;if(t>7.)break;}
+float bb=dot(ro,rd);float cc=dot(ro,ro)-1.44;float hh=bb*bb-cc;if(hh<0.){gl_FragColor=vec4(0.);return;}
+float t=max(0.,-bb-sqrt(hh));float tEnd=-bb+sqrt(hh);bool hit=false;float d;for(int i=0;i<56;i++){vec3 p=ro+rd*t;d=scene(p);if(d<.002){hit=true;break;}t+=d*.9;if(t>tEnd)break;}
 if(!hit){gl_FragColor=vec4(0.);return;}
 vec3 p=ro+rd*t;vec2 e=vec2(.002,0.);vec3 n=normalize(vec3(scene(p+e.xyy)-scene(p-e.xyy),scene(p+e.yxy)-scene(p-e.yxy),scene(p+e.yyx)-scene(p-e.yyx)));
 vec3 v=-rd;vec3 l1=rot*normalize(vec3(-2.,3.,4.));vec3 l2=rot*normalize(vec3(3.,-1.,2.));
@@ -56,13 +57,17 @@ gl_FragColor=vec4(pow(col,vec3(.92)),1.);}`;
   const HOLD = 6500, MORPH = 2600; // ms on each shape, ms per morph
   let yaw = 0, pitch = -.25, vy = reduce ? 0 : .005, vp = 0, drag = false, lx = 0, ly = 0, energy = 0;
   let shape = 0, morph = 0, morphFrom = 0, morphStart = -1, nextAt = performance.now() + HOLD, t0 = performance.now(), visible = true, raf = 0;
-  let scale = .85;
+  let scale = .85, lastDraw = 0;
   function size() { const d = Math.min(1.25, devicePixelRatio || 1) * scale; cv.width = Math.round(cv.clientWidth * d); cv.height = Math.round(cv.clientHeight * d); gl.viewport(0, 0, cv.width, cv.height); }
   function mat(y, x) { const cy = Math.cos(y), sy = Math.sin(y), cx = Math.cos(x), sx = Math.sin(x);
     return new Float32Array([cy, 0, -sy, sy * sx, cx, cy * sx, sy * cx, -sx, cy * cx]); }
   function setCaption() { if (caption) { caption.style.opacity = 0; setTimeout(() => { caption.textContent = NAMES[shape % 4]; caption.style.opacity = 1; }, 300); } }
   function frame(now) {
     raf = 0;
+    if (window.NIYYAH_LEAVING) return;
+    // draw at most ~30 times a second so the page stays responsive on laptop graphics chips
+    if (now - lastDraw < 32 && !drag) { if (visible && !document.hidden) raf = requestAnimationFrame(frame); return; }
+    lastDraw = now;
     if (!reduce && now >= nextAt && morphStart < 0) { morphFrom = morph; morphStart = now; shape += 1; setCaption(); }
     if (morphStart >= 0) { const k = Math.min(1, (now - morphStart) / MORPH); morph = morphFrom + k; if (k >= 1) { morph = shape; morphStart = -1; nextAt = now + HOLD; } }
     if (!drag) { yaw += vy; pitch += vp; vy += ((reduce ? 0 : .004) - vy) * .02; vp *= .94; pitch += (-.25 - pitch) * .01; }
