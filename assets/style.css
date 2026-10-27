@@ -345,3 +345,8 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .bismillah .bism-note em{color:var(--gold-hi)}
 .deck .timer{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(214,180,114,.12)}
 .deck .timer i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-hi));transform-origin:left;transform:scaleX(0)}
+.social{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:20px}
+.social a,.social span{width:40px;height:40px;border-radius:50%;border:1px solid var(--edge);display:grid;place-items:center;color:var(--gold)}
+.social a:hover{background:var(--gold);color:var(--void)}
+.social .soon{opacity:.45}
+.social small{flex-basis:100%;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
