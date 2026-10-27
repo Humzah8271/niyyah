@@ -374,3 +374,16 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .reveal{transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s}
 .track{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
 .hero h1{font-size:clamp(2.8rem,5vw,4.7rem)}
+
+/* contact form */
+.contact{display:grid;gap:18px;background:linear-gradient(160deg,rgba(28,48,41,.55),rgba(10,20,17,.55));border:1px solid var(--edge);border-radius:22px;padding:30px}
+.contact .cf{display:grid;gap:8px}
+.contact label{font-family:var(--mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.contact input,.contact select,.contact textarea{width:100%;font:inherit;font-size:1rem;color:var(--text);background:rgba(5,12,10,.5);border:1px solid var(--edge);border-radius:12px;padding:12px 14px;outline:none;transition:border-color .3s}
+.contact textarea{resize:vertical;min-height:130px}
+.contact select option{background:#0d1a16}
+.contact input:focus,.contact select:focus,.contact textarea:focus{border-color:var(--gold)}
+.contact .btn{justify-self:start}
+.contact .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cf-status{margin:0;font-size:.95rem;color:var(--gold-hi);min-height:1.4em}
+.cf-status.err{color:#e3a99a}
