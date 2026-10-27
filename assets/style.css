@@ -238,7 +238,7 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .ar-text{font-family:var(--arabic);direction:rtl;line-height:1.9;color:var(--gold)}
 .bismillah{display:grid;justify-items:center;gap:4px;padding-top:26px;text-align:center}
 .bismillah .ar-text{font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.6}
-.bismillah small{font-family:var(--body);font-weight:500;font-size:.68rem;letter-spacing:.24em;word-spacing:.08em;text-transform:uppercase;color:var(--dim)}
+.bismillah small{font-family:var(--body);font-weight:500;font-size:.68rem;letter-spacing:.24em;word-spacing:.08em;text-wrap:balance;max-width:44ch;text-transform:uppercase;color:var(--dim)}
 .page-head .bism{display:block;font-family:var(--arabic);font-size:1.35rem;color:var(--gold);direction:rtl;text-align:left;margin-bottom:22px;opacity:.85}
 .verse{padding-block:clamp(70px,10vw,120px);text-align:center;border-block:1px solid var(--edge);background:radial-gradient(ellipse at 50% 50%,rgba(214,180,114,.07),transparent 65%)}
 .verse .ar-text{font-size:clamp(2rem,5vw,3.4rem);line-height:1.7;color:var(--gold-hi)}
