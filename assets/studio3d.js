@@ -1,5 +1,5 @@
 /* ---------- personalisation studio: 3D mug and tote you can turn; they spring back to face you ---------- */
-(() => {
+function niyyahStudio() {
   const host = document.getElementById('viewer');
   if (!host) return;
   const nameIn = document.getElementById('pName'), yearIn = document.getElementById('pYear');
@@ -160,4 +160,19 @@
   size(); setPicked('mug'); redraw();
   (document.fonts && document.fonts.load ? Promise.all(['500 70px Lora', 'italic 92px Lora', '500 23px Poppins', '300 46px Poppins'].map(f => document.fonts.load(f))) : Promise.resolve()).then(redraw, redraw);
   host.dataset.ready = '1';
+}
+/* three.js (about 600 KB) only loads when the studio is about to come into view, so the shop opens quickly */
+(() => {
+  const host = document.getElementById('viewer'); if (!host) return;
+  let started = false;
+  const go = () => {
+    if (started) return; started = true;
+    if (window.THREE) return niyyahStudio();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+    s.onload = s.onerror = niyyahStudio; document.head.appendChild(s);
+  };
+  if (!('IntersectionObserver' in window)) return go();
+  const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { io.disconnect(); go(); } }, { rootMargin: '700px 0px' });
+  io.observe(host);
 })();
