@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Niyyah · Journey</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Count the seven circuits of tawaf and seven laps of sa'i.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="star" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="22" height="22"/><rect x="9" y="9" width="22" height="22" transform="rotate(45 20 20)"/></g></symbol>
+    <symbol id="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  </defs>
+</svg>
+<header class="nav">
+  <div class="nav-shell"></div>
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Niyyah home"><svg><use href="#star"/></svg>Niyyah</a>
+    <ul><li><a href="journey.html" aria-current="page">Journey</a></li><li><a href="shop.html">Shop</a></li><li><a href="plan.html">Plan</a></li><li><a href="packages.html">Packages</a></li><li><a href="about.html">About</a></li></ul>
+    <a class="btn btn-gold" href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">Shop on Etsy</a>
+  </div>
+</header>
+<main>
+  <section class="page-head"><div class="wrap"><span class="bism" lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span><span class="label">The journey</span><h1>Seven and seven</h1><p>The heart of Umrah is two counts: seven circuits around the Kaaba and seven laps between Safa and Marwah. Watch them, pause them, step through them.</p></div></section>
+  <section id="journey" aria-label="Tawaf and sa'i" style="padding-top:30px">
+    <div class="wrap">
+      <div class="rituals">
+        <article class="panel reveal" aria-labelledby="t-tawaf">
+          <div class="ph"><h3 id="t-tawaf">Tawaf</h3><span class="label">Circuits</span></div>
+          <p>Seven circuits anticlockwise, starting from the line of the Black Stone, with the Kaaba on your left.</p>
+          <div class="instr">
+            <svg viewBox="0 0 300 300" id="tawafSvg" aria-hidden="true">
+              <defs><radialGradient id="kg" cx="50%" cy="40%"><stop offset="0" stop-color="#2A2A26"/><stop offset="1" stop-color="#0C0C0A"/></radialGradient></defs>
+              <circle cx="150" cy="150" r="118" fill="none" stroke="rgba(214,186,128,.14)" stroke-width="1"/>
+              <circle cx="150" cy="150" r="96" fill="none" stroke="rgba(214,186,128,.10)" stroke-width="1" stroke-dasharray="2 6"/>
+              <g id="tawafTicks"></g>
+              <path id="tawafArc" d="" fill="none" stroke="url(#goldStroke)" stroke-width="2.4" stroke-linecap="round"/>
+              <linearGradient id="goldStroke" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F3DFB0"/><stop offset="1" stop-color="#8C6D3A"/></linearGradient>
+              <rect x="128" y="128" width="44" height="44" rx="2" fill="url(#kg)" stroke="rgba(214,186,128,.5)"/>
+              <rect x="128" y="138" width="44" height="5" fill="#B8924F" opacity=".85"/>
+              <circle id="pilgrim" cx="150" cy="32" r="6" fill="#F3DFB0"/>
+              <circle id="pilgrimGlow" cx="150" cy="32" r="16" fill="rgba(243,223,176,.18)"/>
+            </svg>
+          </div>
+          <div class="readout"><span>Circuit <b id="tawafN">1</b> / 7</span><div class="ctrls"><button class="ctrl" id="tawafPlay" aria-pressed="true">Pause</button><button class="ctrl" id="tawafStep">Next</button></div></div>
+        </article>
+        <article class="panel reveal" aria-labelledby="t-sai">
+          <div class="ph"><h3 id="t-sai">Sa'i</h3><span class="label">Laps</span></div>
+          <p>Seven laps between Safa and Marwah. Safa to Marwah counts as one, Marwah back to Safa as two, ending at Marwah. Men walk briskly between the green lights.</p>
+          <div class="instr">
+            <svg viewBox="0 0 340 170" id="saiSvg" aria-hidden="true">
+              <line x1="40" y1="96" x2="300" y2="96" stroke="rgba(214,186,128,.18)" stroke-width="18" stroke-linecap="round"/>
+              <line x1="40" y1="96" x2="300" y2="96" stroke="rgba(214,186,128,.35)" stroke-width="1" stroke-dasharray="3 7"/>
+              <rect x="128" y="84" width="84" height="24" rx="12" fill="rgba(120,200,160,.10)" stroke="rgba(120,200,160,.35)"/>
+              <text x="170" y="130" fill="#93A39B" font-family="JetBrains Mono, monospace" font-size="8" text-anchor="middle" letter-spacing="1.5">GREEN LIGHTS</text>
+              <path d="M18 112 L40 64 L62 112 Z" fill="rgba(214,186,128,.12)" stroke="rgba(214,186,128,.55)"/>
+              <path d="M278 112 L300 70 L322 112 Z" fill="rgba(214,186,128,.12)" stroke="rgba(214,186,128,.55)"/>
+              <text x="40" y="138" fill="#D6B472" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle" letter-spacing="2">SAFA</text>
+              <text x="300" y="138" fill="#D6B472" font-family="JetBrains Mono, monospace" font-size="10" text-anchor="middle" letter-spacing="2">MARWAH</text>
+              <g id="saiDots"></g>
+              <circle id="walker" cx="40" cy="96" r="7" fill="#F3DFB0"/>
+              <circle id="walkerGlow" cx="40" cy="96" r="17" fill="rgba(243,223,176,.18)"/>
+            </svg>
+          </div>
+          <div class="readout"><span>Lap <b id="saiN">1</b> / 7 · <span id="saiDir">Safa → Marwah</span> · <span id="saiPace">walking</span></span><div class="ctrls"><button class="ctrl" id="saiPlay" aria-pressed="true">Pause</button><button class="ctrl" id="saiStep">Next</button></div></div>
+        </article>
+      </div>
+      <ol class="steps reveal">
+        <li><span class="k">01 · MIQAT</span><h4>Ihram</h4><p>Make your intention and enter ihram before the miqat. On a direct flight to Jeddah this happens on the plane.</p></li>
+        <li><span class="k">02 · ×7</span><h4>Tawaf</h4><p>Seven circuits of the Kaaba, then pray two rak'ahs.</p></li>
+        <li><span class="k">03 · ×7</span><h4>Sa'i</h4><p>Seven laps between Safa and Marwah.</p></li>
+        <li><span class="k">04 · DONE</span><h4>Halq or taqsir</h4><p>Men shave or shorten their hair; women trim a small amount.</p></li>
+      </ol>
+      
+      <article class="panel dua reveal" style="margin-top:22px">
+        <span class="label">The talbiyah</span>
+        <p class="ar-text" lang="ar" style="font-size:clamp(1.5rem,3.2vw,2.2rem);margin-top:14px">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+        <p class="tr">Labbayk Allāhumma labbayk, labbayka lā sharīka laka labbayk, innal-ḥamda wan-ni‘mata laka wal-mulk, lā sharīka lak</p>
+        <p class="en">“Here I am, O Allah, here I am. Here I am, You have no partner, here I am. All praise, all blessings and all sovereignty belong to You. You have no partner.”</p>
+        <cite>Sahih al-Bukhari 1549 · Sahih Muslim 1184 · said once you have entered ihram</cite>
+      </article>
+      <p class="note"><b>An overview, not a ruling.</b> Our full guide covers every step with each dua in Arabic, transliteration and English, and it is being reviewed by an imam before it goes on sale. Where scholars differ, follow your own scholar or group leader.</p>
+    </div>
+  </section>
+  <section class="verse"><div class="wrap reveal"><p class="ar-text" lang="ar">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</p><blockquote>“And complete the Hajj and Umrah for Allah.”<cite>Quran · Al-Baqarah 2:196</cite></blockquote></div></section>
+  <div class="wrap next-page"><span class="label">Next</span><a href="shop.html">The shop →</a></div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="brand" href="index.html"><svg><use href="#star"/></svg>Niyyah</a><p>Umrah planners, personalised gifts and, soon, an imam-reviewed guide and complete kits. Made in Glasgow.</p></div>
+      <nav aria-label="Shop"><span class="label">Shop</span><a href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">Etsy shop</a><a href="shop.html">All products</a><a href="shop.html#studio">Personalise</a><a href="packages.html">Umrah packages</a></nav>
+      <nav aria-label="Help"><span class="label">Help</span><a href="plan.html">Plan your Umrah</a><a href="about.html#groups">Group orders</a><a href="thank-you.html">After you order</a><a href="about.html#faq">FAQ</a></nav>
+    </div>
+    <div class="big-word" aria-hidden="true">Niyyah</div>
+  </div>
+  <div class="legal"><div class="wrap">© 2026 NIYYAH · GLASGOW · SOLD VIA ETSY (NIYYAHPACKAGES)</div></div>
+</footer>
+<script src="assets/ui.js"></script>
+<script src="assets/sky.js"></script>
+<script src="assets/rituals.js"></script>
+</body>
+</html>

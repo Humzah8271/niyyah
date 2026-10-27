@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Niyyah · Shop</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Umrah planners, cards, wallpapers and personalised gifts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;1,400&family=Poppins:wght@300;500&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<div class="progress" aria-hidden="true"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="star" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="9" width="22" height="22"/><rect x="9" y="9" width="22" height="22" transform="rotate(45 20 20)"/></g></symbol>
+    <symbol id="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
+  </defs>
+</svg>
+<header class="nav">
+  <div class="nav-shell"></div>
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Niyyah home"><svg><use href="#star"/></svg>Niyyah</a>
+    <ul><li><a href="journey.html">Journey</a></li><li><a href="shop.html" aria-current="page">Shop</a></li><li><a href="plan.html">Plan</a></li><li><a href="packages.html">Packages</a></li><li><a href="about.html">About</a></li></ul>
+    <a class="btn btn-gold" href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">Shop on Etsy</a>
+  </div>
+</header>
+<main>
+  <section class="page-head"><div class="wrap"><span class="bism" lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span><span class="label">The shop</span><h1>For the journey, and the welcome home</h1><p>Everything is sold through our Etsy shop, so checkout, payment and buyer protection are handled by Etsy.</p></div></section>
+  <section aria-label="Products" style="padding-top:30px">
+    <div class="wrap">
+      <div class="filters" id="filters" role="group" aria-label="Filter products">
+        <button data-f="all" aria-pressed="true">All</button><button data-f="digital" aria-pressed="false">Printables</button><button data-f="personalised" aria-pressed="false">Personalised</button><button data-f="bundle" aria-pressed="false">Bundle</button>
+      </div>
+      <div class="grid">
+        <a class="card reveal wide" data-kind="bundle" href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/bundle.jpg" alt="Complete Umrah Planner Bundle" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Complete Umrah Planner Bundle</h3>
+            <p>The checklist, journal, budget planner, itinerary and cards together, for less than half the price of buying them separately.</p>
+            <div class="row"><span class="price">£8.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/uk/listing/4603511710" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/checklist.jpg" alt="Umrah Packing Checklist" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline">Instant download</span>
+            <h3>Umrah Packing Checklist</h3>
+            <p>Three printable pages: documents, ihram, toiletries for ihram, your day bag and a countdown from eight weeks out. A4 and US Letter.</p>
+            <div class="row"><span class="price">£4.19<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/journal.jpg" alt="Umrah Journal" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Journal</h3>
+            <p>Ten pages: your intention, trip details, a list for the duas people ask of you, a 7 + 7 tawaf and sa'i counter, daily pages and reflections.</p>
+            <div class="row"><span class="price">£5.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/budget.jpg" alt="Umrah Budget Planner" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Budget Planner</h3>
+            <p>Estimate the trip, track your savings 5% at a time, and log spending in riyals and pounds while you're away.</p>
+            <div class="row"><span class="price">£2.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/itinerary.jpg" alt="Umrah Itinerary Planner" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Itinerary Planner</h3>
+            <p>Flights, hotels and contacts on one page, a 16-day plan, and lists for Makkah and Madinah.</p>
+            <div class="row"><span class="price">£2.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/wallpapers.jpg" alt="Umrah Phone Wallpapers" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Phone Wallpapers</h3>
+            <p>Six lock screens in Niyyah green and gold: Bismillah, the talbiyah, Quran 2:196 and hadith, each with its source.</p>
+            <div class="row"><span class="price">£1.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/cards.jpg" alt="Umrah Mubarak Cards and Tags" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Mubarak Cards and Tags</h3>
+            <p>Two card designs, "Umrah Mubarak" and "Welcome home", plus eight gift tags. Print on card at home.</p>
+            <div class="row"><span class="price">£2.99<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="digital" data-tilt href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/bunting.jpg" alt="Umrah Mubarak Bunting" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline new">New · arriving this week</span>
+            <h3>Umrah Mubarak Bunting</h3>
+            <p>Two printable banners in one file: UMRAH MUBARAK and WELCOME HOME, with gold star flags between words.</p>
+            <div class="row"><span class="price">£4.19<small>incl. VAT</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="personalised" data-tilt href="https://www.etsy.com/uk/listing/4603538553" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/mug.jpg" alt="Umrah Mubarak Mug" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline">Personalised · free UK delivery</span>
+            <h3>Umrah Mubarak Mug</h3>
+            <p>Their name under "Umrah Mubarak", with "May Allah accept it from you". Printed on both sides, made to order in the UK.</p>
+            <div class="row"><span class="price">£15.99<small>free UK delivery</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+        <a class="card reveal" data-kind="personalised" data-tilt href="https://www.etsy.com/uk/listing/4603538707" target="_blank" rel="noopener">
+          <span class="glare"></span>
+          <div class="img"><img src="img/tote.jpg" alt=""Your Name's Umrah" Tote" width="1600" height="1200" loading="lazy"></div>
+          <div class="body">
+            <span class="tagline">Personalised · free UK delivery</span>
+            <h3>"Your Name's Umrah" Tote</h3>
+            <p>A cotton day bag printed on both sides with their name, the talbiyah and the year they travel. About 42 × 38 cm, made to order in the UK.</p>
+            <div class="row"><span class="price">£24.99<small>free UK delivery</small></span><span class="arrow"><svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></span></div>
+          </div>
+        </a>
+      </div>
+      <p class="price-note">Prices are what you pay on Etsy. Downloads include UK VAT, which Etsy adds at checkout. Personalised items include free UK delivery and are printed to order by our production partner, Printify.</p>
+    </div>
+  </section>
+  <section id="studio" aria-labelledby="studio-title">
+    <div class="wrap studio">
+      <div class="reveal">
+        <span class="label">Personalisation studio</span>
+        <h2 id="studio-title" style="font-size:clamp(2.4rem,5vw,4rem);margin-top:16px">See their name on it</h2>
+        <p class="muted" style="margin-top:16px;font-size:1.05rem;font-weight:300">Type a name and turn the mug or tote to look at it from any angle. Let go and it settles back. You'll enter the name for real in the personalisation box on Etsy.</p>
+        <div class="toggle" role="group" aria-label="Choose a product">
+          <button id="pickMug" aria-pressed="true">Mug · £15.99</button>
+          <button id="pickTote" aria-pressed="false">Tote · £24.99</button>
+        </div>
+        <div class="field">
+          <label for="pName">Name</label>
+          <input id="pName" maxlength="12" value="Raheema" autocomplete="off" spellcheck="false">
+        </div>
+        <div class="field" id="yearRow" hidden>
+          <label for="pYear">Year of travel</label>
+          <input id="pYear" maxlength="4" value="2026" inputmode="numeric" style="font-family:var(--mono);font-style:normal;font-size:1.4rem">
+        </div>
+        <a class="btn btn-gold" id="studioBuy" href="https://www.etsy.com/uk/listing/4603538553" target="_blank" rel="noopener"><span>Order the mug on Etsy</span> <svg width="16" height="16" aria-hidden="true"><use href="#arr"/></svg></a>
+      </div>
+      <div class="viewer reveal" id="viewer" tabindex="0" role="img" aria-label="3D preview of the personalised product. Drag or use the arrow keys to turn it." data-mug="https://www.etsy.com/uk/listing/4603538553" data-tote="https://www.etsy.com/uk/listing/4603538707">
+        <div class="tip"><i></i>drag to look around</div>
+        <span class="cap">Preview of the design. The printed product may vary slightly.</span>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="cs-title" style="padding-top:0">
+    <div class="wrap">
+      <div class="head reveal"><span class="label">Coming to the shop</span><h2 id="cs-title">Being made now</h2></div>
+      <div class="coming-grid">
+        <article class="panel reveal"><h3>The Niyyah Umrah Guide</h3><p>Every step in plain English, every dua in Arabic, transliteration and English. It goes on sale once our imam has reviewed it.</p></article>
+        <article class="panel reveal"><h3>Dua cards</h3><p>Pocket cards with the duas you'll want during tawaf, sa'i and your visit to Madinah. Also waiting on the imam's review.</p></article>
+        <article class="panel reveal"><h3>The all-in-one kit</h3><p>Ihram, belt, prayer mat, unscented toiletries and the guide in one box, packed by hand in Glasgow. We're testing samples first.</p></article>
+      </div>
+    </div>
+  </section>
+  <div class="wrap next-page"><span class="label">Next</span><a href="plan.html">Plan your Umrah →</a></div>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a class="brand" href="index.html"><svg><use href="#star"/></svg>Niyyah</a><p>Umrah planners, personalised gifts and, soon, an imam-reviewed guide and complete kits. Made in Glasgow.</p></div>
+      <nav aria-label="Shop"><span class="label">Shop</span><a href="https://www.etsy.com/shop/NiyyahPackages" target="_blank" rel="noopener">Etsy shop</a><a href="shop.html">All products</a><a href="shop.html#studio">Personalise</a><a href="packages.html">Umrah packages</a></nav>
+      <nav aria-label="Help"><span class="label">Help</span><a href="plan.html">Plan your Umrah</a><a href="about.html#groups">Group orders</a><a href="thank-you.html">After you order</a><a href="about.html#faq">FAQ</a></nav>
+    </div>
+    <div class="big-word" aria-hidden="true">Niyyah</div>
+  </div>
+  <div class="legal"><div class="wrap">© 2026 NIYYAH · GLASGOW · SOLD VIA ETSY (NIYYAHPACKAGES)</div></div>
+</footer>
+<script src="assets/ui.js"></script>
+<script src="assets/sky.js"></script>
+<script src="assets/shop.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="assets/studio3d.js"></script>
+</body>
+</html>
