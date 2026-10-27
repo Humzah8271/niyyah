@@ -73,11 +73,14 @@ function niyyahStudio() {
   const mug = new THREE.Group();
   const ceramic = new THREE.MeshPhysicalMaterial({ map: mugTex, roughness: .5, metalness: 0, clearcoat: .45, clearcoatRoughness: .4 });
   const white = new THREE.MeshPhysicalMaterial({ color: 0xf7f6f1, roughness: .3, clearcoat: 1, clearcoatRoughness: .15 });
-  const inside = new THREE.MeshStandardMaterial({ color: 0xe9e7e0, roughness: .45, side: THREE.BackSide });
+  const inCv = document.createElement('canvas'); inCv.width = 4; inCv.height = 256;
+  { const g = inCv.getContext('2d'), gr = g.createLinearGradient(0, 0, 0, 256); gr.addColorStop(0, '#f1efe9'); gr.addColorStop(.35, '#cfccc3'); gr.addColorStop(1, '#8f8c84'); g.fillStyle = gr; g.fillRect(0, 0, 4, 256); }
+  const inTex = new THREE.CanvasTexture(inCv); inTex.encoding = THREE.sRGBEncoding;
+  const inside = new THREE.MeshStandardMaterial({ map: inTex, roughness: .55, side: THREE.BackSide });
   const body = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 2.3, 128, 1, true, Math.PI / 2, Math.PI * 2), ceramic); mug.add(body);
   const inner = new THREE.Mesh(new THREE.CylinderGeometry(.93, .93, 2.26, 96, 1, true), inside); mug.add(inner);
   const lip = new THREE.Mesh(new THREE.TorusGeometry(.965, .036, 16, 128), white); lip.rotation.x = Math.PI / 2; lip.position.y = 1.15; mug.add(lip);
-  const floor = new THREE.Mesh(new THREE.CircleGeometry(.93, 64), new THREE.MeshStandardMaterial({ color: 0xe4e2db, roughness: .5 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -.95; mug.add(floor);
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(.93, 64), new THREE.MeshStandardMaterial({ color: 0x8a877f, roughness: .6 })); floor.rotation.x = -Math.PI / 2; floor.position.y = -1.1; mug.add(floor);
   const base = new THREE.Mesh(new THREE.CircleGeometry(1, 64), white); base.rotation.x = Math.PI / 2; base.position.y = -1.15; mug.add(base);
   const handle = new THREE.Mesh(new THREE.TorusGeometry(.5, .12, 24, 64, Math.PI * 1.1), white);
   handle.rotation.z = -Math.PI / 2 - Math.PI * .05; handle.position.set(1.0, .02, 0); handle.scale.set(1, 1.15, 1); mug.add(handle);
@@ -137,11 +140,11 @@ function niyyahStudio() {
   host.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; ly = e.clientY; host.setPointerCapture(e.pointerId); host.classList.add('grabbing'); kick(); });
   host.addEventListener('pointermove', e => {
     if (!drag) return; const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY;
-    yaw += dx * .012; pitch = Math.max(-1.1, Math.min(1.1, pitch + dy * .01)); vy = dx * .6; vp = dy * .5; kick();
+    yaw += dx * .012; pitch = Math.max(-.35, Math.min(.5, pitch + dy * .006)); vy = dx * .6; vp = dy * .5; kick();
   });
   const end = () => { drag = false; host.classList.remove('grabbing'); kick(); };
   host.addEventListener('pointerup', end); host.addEventListener('pointercancel', end);
-  host.addEventListener('keydown', e => { const k = { ArrowLeft: [-.5, 0], ArrowRight: [.5, 0], ArrowUp: [0, -.35], ArrowDown: [0, .35] }[e.key]; if (k) { yaw += k[0]; pitch += k[1]; e.preventDefault(); kick(); } });
+  host.addEventListener('keydown', e => { const k = { ArrowLeft: [-.5, 0], ArrowRight: [.5, 0], ArrowUp: [0, -.2], ArrowDown: [0, .2] }[e.key]; if (k) { yaw += k[0]; pitch = Math.max(-.35, Math.min(.5, pitch + k[1])); e.preventDefault(); kick(); } });
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(host);
   document.addEventListener('visibilitychange', kick);
   addEventListener('resize', () => { size(); kick(); });
