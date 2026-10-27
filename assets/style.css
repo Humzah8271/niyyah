@@ -350,3 +350,22 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .social a:hover{background:var(--gold);color:var(--void)}
 .social .soon{opacity:.45}
 .social small{flex-basis:100%;font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+/* hero showcase: the real products in a hairline mihrab arch (replaces the 3D emblem) */
+.showcase{position:relative;width:100%;max-width:560px;aspect-ratio:1/1.08;margin-inline:auto}
+.showcase .arch{position:absolute;left:12%;right:12%;top:0;bottom:4%;border:1px solid rgba(214,180,114,.38);border-radius:50% 50% 14px 14px/34% 34% 14px 14px;background:radial-gradient(ellipse at 50% 30%,rgba(214,180,114,.10),rgba(214,180,114,0) 65%)}
+.showcase .arch i{position:absolute;inset:12px;border:1px solid rgba(214,180,114,.16);border-radius:inherit}
+.sc-book,.sc-phone{position:absolute;display:block;text-decoration:none}
+.sc-book img,.sc-phone img{display:block;width:100%;height:auto}
+.sc-book{left:19%;top:13%;width:45%;transform:rotate(-4deg);box-shadow:0 28px 60px -12px rgba(0,0,0,.65),0 0 0 1px rgba(214,180,114,.25);border-radius:3px;overflow:hidden;animation:floatA 9s ease-in-out infinite}
+.sc-phone{right:15%;bottom:9%;width:27%;padding:5px;background:#0b100e;border-radius:26px;box-shadow:0 30px 60px -10px rgba(0,0,0,.7),0 0 0 1px rgba(214,180,114,.3);transform:rotate(5deg);animation:floatB 9s ease-in-out infinite}
+.sc-phone img{border-radius:21px}
+.sc-cap{position:absolute;font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.sc-cap-1{left:18%;bottom:13%}
+.sc-cap-2{right:13%;top:22%}
+@keyframes floatA{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-4deg) translateY(-8px)}}
+@keyframes floatB{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(5deg) translateY(6px)}}
+.sc-book:hover,.sc-phone:hover{animation-play-state:paused}
+@media (max-width:900px){.showcase{max-width:420px;order:-1;margin-bottom:8px}}
+.reveal{transition:transform .6s cubic-bezier(.2,.8,.2,1),opacity .6s}
+.track{transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.hero h1{font-size:clamp(2.8rem,5vw,4.7rem)}

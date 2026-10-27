@@ -4,9 +4,9 @@
   const x = c.getContext('2d');
   let w, h, stars = [], mx = .5, glow, last = 0, glints = [], nextGlint = 0;
   function size() {
-    const d = Math.min(devicePixelRatio || 1, 1.5);
+    const d = 1; // one canvas pixel per CSS pixel keeps this cheap; stars are tiny anyway
     w = innerWidth; h = innerHeight; c.width = w * d; c.height = h * d; x.setTransform(d, 0, 0, d, 0, 0);
-    stars = Array.from({ length: Math.min(170, Math.round(w * h / 11000)) }, () => ({ x: Math.random() * w, y: Math.random() * h, z: Math.random() * .9 + .1, p: Math.random() * 6.28, s: .6 + Math.random() * 1.4 }));
+    stars = Array.from({ length: Math.min(120, Math.round(w * h / 14000)) }, () => ({ x: Math.random() * w, y: Math.random() * h, z: Math.random() * .9 + .1, p: Math.random() * 6.28, s: .6 + Math.random() * 1.4 }));
     glow = x.createRadialGradient(w * .75, h * .2, 0, w * .75, h * .2, Math.max(w, h) * .8);
     glow.addColorStop(0, 'rgba(24,52,43,.55)'); glow.addColorStop(1, 'rgba(6,11,9,0)');
   }
@@ -20,7 +20,7 @@
   function draw(t) {
     if (window.NIYYAH_LEAVING) return;
     if (!reduce) requestAnimationFrame(draw);
-    if (t - last < 33) return; last = t;
+    if (t - last < 66) return; last = t; // ~15 frames a second is plenty for a slow twinkle
     x.clearRect(0, 0, w, h); x.fillStyle = glow; x.fillRect(0, 0, w, h);
     const sy = scrollY * .05;
     const pos = s => [((s.x + (mx - .5) * 30 * s.z) % w + w) % w, ((s.y - sy * s.z) % h + h) % h];

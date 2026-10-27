@@ -44,7 +44,7 @@
     const track = deck.querySelector('.track'), slides = [...deck.querySelectorAll('.slide')], dots = [...deck.querySelectorAll('.dot')];
     const bar = deck.querySelector('.timer i');
     const prev = deck.querySelector('[data-prev]'), next = deck.querySelector('[data-next]');
-    const DUR = 10000;
+    const DUR = 6500;
     let i = 0, elapsed = 0, last = 0, hover = false, onScreen = false;
     function go(n) {
       i = (n + slides.length) % slides.length; elapsed = 0;
