@@ -131,7 +131,10 @@ function niyyahStudio() {
     }
     obj.rotation.set(pitch, yaw, 0, 'XYZ');
     obj.position.y = (current === 'mug' ? -.2 : -.35) + (reduce ? 0 : Math.sin(t * 1.4) * .035);
-    shadow.scale.x = current === 'mug' ? .8 : 1; shadow.position.y = current === 'mug' ? -1.42 : -1.8;
+    if (current === 'mug') { // sit the shadow just under the lowest point of the tilted mug
+      const c = Math.cos(pitch), sn = Math.abs(Math.sin(pitch));
+      shadow.position.y = obj.position.y - (1.15 * c + sn) - .02; shadow.scale.set(.72, .8 + sn * .6, 1); shadow.material.opacity = .85 - sn * .5;
+    } else { shadow.position.y = -1.8; shadow.scale.set(1, 1, 1); shadow.material.opacity = 1; }
     renderer.render(scene, camera);
     const moving = drag || Math.abs(vy) + Math.abs(vp) > .002 || !reduce;
     if (visible && !document.hidden && moving) raf = requestAnimationFrame(frame);
@@ -140,11 +143,11 @@ function niyyahStudio() {
   host.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; ly = e.clientY; host.setPointerCapture(e.pointerId); host.classList.add('grabbing'); kick(); });
   host.addEventListener('pointermove', e => {
     if (!drag) return; const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY;
-    yaw += dx * .012; pitch = Math.max(-.35, Math.min(.5, pitch + dy * .006)); vy = dx * .6; vp = dy * .5; kick();
+    yaw += dx * .012; pitch = Math.max(-.12, Math.min(.5, pitch + dy * .006)); vy = dx * .6; vp = dy * .5; kick();
   });
   const end = () => { drag = false; host.classList.remove('grabbing'); kick(); };
   host.addEventListener('pointerup', end); host.addEventListener('pointercancel', end);
-  host.addEventListener('keydown', e => { const k = { ArrowLeft: [-.5, 0], ArrowRight: [.5, 0], ArrowUp: [0, -.2], ArrowDown: [0, .2] }[e.key]; if (k) { yaw += k[0]; pitch = Math.max(-.35, Math.min(.5, pitch + k[1])); e.preventDefault(); kick(); } });
+  host.addEventListener('keydown', e => { const k = { ArrowLeft: [-.5, 0], ArrowRight: [.5, 0], ArrowUp: [0, -.2], ArrowDown: [0, .2] }[e.key]; if (k) { yaw += k[0]; pitch = Math.max(-.12, Math.min(.5, pitch + k[1])); e.preventDefault(); kick(); } });
   new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible) kick(); }).observe(host);
   document.addEventListener('visibilitychange', kick);
   addEventListener('resize', () => { size(); kick(); });
