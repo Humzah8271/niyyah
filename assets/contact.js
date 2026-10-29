@@ -12,7 +12,7 @@
       const j = await r.json().catch(() => ({}));
       if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'failed');
       f.reset(); st.textContent = 'Thank you, your message has been sent. We\'ll reply by email.';
-    } catch (err) { st.classList.add('err'); st.innerHTML = 'Sorry, that didn\'t send. Please email <a class="tlink" href="mailto:niyyahpackages@gmail.com">niyyahpackages@gmail.com</a>.'; }
+    } catch (err) { st.classList.add('err'); st.innerHTML = 'Sorry, that didn\'t send. Please email <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a>.'; }
     btn.disabled = false;
   });
 })();
