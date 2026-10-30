@@ -504,3 +504,28 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 @media(max-width:380px){.question-panel{padding:20px}.planning-product{grid-template-columns:1fr}.planning-product img{width:120px;height:90px}.trip-summary{padding:18px;column-gap:12px}.trip-countdown{padding-left:12px}.trip-countdown strong{font-size:2.2rem}}
 
 #planning-form legend,#results-title{scroll-margin-top:120px}
+/* Shared navigation, a consistent signature and room for reflection. */
+.mobile-menu summary{list-style:none;width:48px;height:48px;padding:12px;display:grid;place-items:center;border-radius:50%;background:rgba(15,30,25,.55)}
+.mobile-menu summary::-webkit-details-marker{display:none}
+.mobile-menu summary::before,.mobile-menu summary::after{display:none}
+.hamburger{width:22px;display:grid;gap:5px}.hamburger i{display:block;width:22px;height:1.5px;background:var(--gold-hi);transition:transform .3s,opacity .3s}
+.mobile-menu[open] .hamburger i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.mobile-menu[open] .hamburger i:nth-child(2){opacity:0}
+.mobile-menu[open] .hamburger i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.brand:hover svg,.brand:focus-visible svg{transform:rotate(360deg)}
+.footer-brand{font-size:1.8rem}.simple-footer .footer-brand small{color:var(--gold)}
+.page-reminder{margin-top:40px;padding-block:clamp(100px,13vw,180px);border:0;background:radial-gradient(ellipse at center,rgba(214,180,114,.04),transparent 68%)}
+.page-reminder .wrap{max-width:960px}.page-reminder blockquote{max-width:40ch;line-height:1.5}.page-reminder cite a{text-decoration:none}.page-reminder cite a:hover{text-decoration:underline}
+.home .page-reminder{margin-top:10px}.page-reminder .ar-text{font-size:clamp(2rem,5vw,3.8rem);line-height:1.9}
+.contact-page #contact{padding-top:50px;padding-bottom:40px}.contact-page #contact .split{gap:50px}.contact-page #faq{max-width:900px;margin:auto;padding-bottom:0}.contact-page #faq .head{margin-bottom:28px}.contact-page .faq details{padding-block:16px}
+.legacy-contact{padding-bottom:20px;color:var(--muted)}
+.shop-feature{padding-top:20px;padding-bottom:0}.shop-feature .card{max-width:1060px;margin:auto}.product-grid{gap:36px 30px}.product-grid .body{padding:26px}.shop-feature+.studio,#studio{padding-block:60px}
+.talbiyah-section{max-width:1000px;padding-top:0;padding-bottom:20px}.talbiyah-section .dua{padding:42px 32px}.talbiyah-section h2{font-size:2.3rem}.talbiyah-intro{max-width:56ch;margin:20px auto 26px;color:var(--muted);line-height:1.8}
+.instr{position:relative;min-height:330px}.instr>svg{transition:opacity .8s,filter .8s}.instr.completed>svg{opacity:.08;filter:blur(3px)}
+.ritual-completion{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:12px;padding:14px;opacity:0;visibility:hidden;transition:opacity .8s,visibility .8s;pointer-events:none}
+.ritual-completion.is-visible{opacity:1;visibility:visible;pointer-events:auto}.ritual-completion .ar-text{font-size:clamp(1.55rem,3vw,2rem);line-height:1.8;color:var(--gold-hi)}.ritual-completion p:not(.ar-text){max-width:36ch;color:var(--text);font-size:.95rem}.ritual-completion a,.ritual-completion small{font-size:.75rem;color:var(--muted);text-underline-offset:4px}
+.planning-tips{max-width:780px;padding-bottom:30px}.planning-tips>h2{display:none}.tip-card{background:rgba(15,30,25,.35);padding:22px 28px}#planning-tip{min-height:138px}#planning-tip h3{font-size:1.5rem}#planning-tip p{font-size:.95rem}.tip-controls{border:0;padding-top:0;margin-top:0}.tip-controls button{width:36px;height:36px;font-size:.9rem}
+.trip-summary .trip-countdown{margin-top:20px;margin-bottom:22px}.date-adjust{border-top:1px solid var(--edge);padding-top:12px}.date-adjust summary{font-family:var(--body);font-size:.9rem;color:var(--gold-hi);padding:10px 0;line-height:1.6;letter-spacing:0}.date-adjust label{margin-top:14px}.date-adjust summary::after{font-size:1rem}
+.question-panel fieldset{animation:question-in .3s ease-out}@keyframes question-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.trip-summary{display:block}.trip-summary .trip-countdown{border-left:0;padding:0;border-top:0;display:flex;flex-direction:row;align-items:baseline;gap:12px;margin:16px 0}.trip-countdown strong{font-size:2.8rem}.trip-summary h2{display:none}#trip-stage{font-size:.9rem;margin:8px 0}.date-adjust{padding-top:4px}.date-adjust[open] input{max-width:100%}#planning-tip{min-height:180px}.product-grid{gap:30px}#studio{padding-block:42px}.contact-page #contact .split{gap:25px}.talbiyah-section .dua{padding:30px 20px}.instr{min-height:330px}.page-reminder{padding-block:100px}}
+@media(prefers-reduced-motion:reduce){.brand:hover svg{transform:none}.ritual-completion,.instr>svg{transition:none}}

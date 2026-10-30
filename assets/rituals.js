@@ -1,61 +1,52 @@
-/* ---------- tawaf and sa'i instruments ---------- */
+/* Practice animations with a gentle completion pause after all seven rounds/laps. */
 (() => {
-  const ticks = document.getElementById('tawafTicks'); if (!ticks) return;
-  const NS = 'http://www.w3.org/2000/svg';
-  for (let i = 0; i < 7; i++) { const a = -Math.PI / 2 - i * 2 * Math.PI / 7; const c = document.createElementNS(NS, 'circle');
-    c.setAttribute('cx', 150 + 132 * Math.cos(a)); c.setAttribute('cy', 150 + 132 * Math.sin(a)); c.setAttribute('r', 3); c.setAttribute('fill', 'rgba(214,186,128,.25)'); ticks.appendChild(c); }
-  const tickEls = [...ticks.children];
-  const arc = document.getElementById('tawafArc'), pil = document.getElementById('pilgrim'), pg = document.getElementById('pilgrimGlow'), tn = document.getElementById('tawafN');
-  const dots = document.getElementById('saiDots');
-  for (let i = 0; i < 7; i++) { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', 110 + i * 20); c.setAttribute('cy', 40); c.setAttribute('r', 4); c.setAttribute('fill', 'rgba(214,186,128,.2)'); dots.appendChild(c); }
-  const dotEls = [...dots.children];
-  const walker = document.getElementById('walker'), wg = document.getElementById('walkerGlow'), sn = document.getElementById('saiN'), sd = document.getElementById('saiDir'), pace = document.getElementById('saiPace');
-
-  // Tawaf: 5.5s per circuit. Sa'i: distance-based, slow walk, brisk between the green lights.
-  const TAWAF_SEC = 5.5, X0 = 40, X1 = 300, G0 = 128, G1 = 212, SLOW = 34, FAST = 95; // px per second
-  let tp = 0, lap = 0, wx = X0, tPlay = !reduce, sPlay = !reduce, last = performance.now(), visible = true;
-
-  const smooth = (a, b, x) => { const t = Math.max(0, Math.min(1, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
-  const speedAt = x => { const inG = smooth(G0 - 14, G0 + 6, x) * (1 - smooth(G1 - 6, G1 + 14, x)); return SLOW + (FAST - SLOW) * inG; };
-
-  function render() {
-    const l = Math.min(6, Math.floor(tp)), frac = tp - Math.floor(tp);
-    const a = -Math.PI / 2 - frac * 2 * Math.PI;
-    const x = 150 + 118 * Math.cos(a), y = 150 + 118 * Math.sin(a);
-    pil.setAttribute('cx', x); pil.setAttribute('cy', y); pg.setAttribute('cx', x); pg.setAttribute('cy', y);
-    arc.setAttribute('d', frac < .002 ? '' : `M150 32 A118 118 0 ${frac > .5 ? 1 : 0} 0 ${x.toFixed(2)} ${y.toFixed(2)}`);
-    tn.textContent = l + 1;
-    tickEls.forEach((c, i) => c.setAttribute('fill', i < l ? '#D6B472' : 'rgba(214,186,128,.25)'));
-    walker.setAttribute('cx', wx); wg.setAttribute('cx', wx);
-    const forward = lap % 2 === 0;
-    sn.textContent = lap + 1; sd.textContent = forward ? 'Safa → Marwah' : 'Marwah → Safa';
-    const brisk = wx > G0 && wx < G1;
-    if (pace) pace.textContent = brisk ? 'moving faster' : 'walking';
-    wg.setAttribute('fill', brisk ? 'rgba(140,220,180,.25)' : 'rgba(243,223,176,.18)');
-    dotEls.forEach((c, i) => c.setAttribute('fill', i < lap ? '#D6B472' : 'rgba(214,186,128,.2)'));
+  const get=id=>document.getElementById(id);
+  if(!get('tawafTicks'))return;
+  const NS='http://www.w3.org/2000/svg';
+  function dots(id,count,coords){const host=get(id);for(let i=0;i<count;i++){const dot=document.createElementNS(NS,'circle');const [x,y,r]=coords(i);dot.setAttribute('cx',x);dot.setAttribute('cy',y);dot.setAttribute('r',r);host.appendChild(dot);}return [...host.children];}
+  const tawafDots=dots('tawafTicks',7,i=>{const a=-Math.PI/2-i*2*Math.PI/7;return [150+132*Math.cos(a),150+132*Math.sin(a),3];});
+  const saiDots=dots('saiDots',7,i=>[110+i*20,40,4]);
+  let tp=0,lap=0,wx=40,tDone=false,sDone=false,tWait=0,sWait=0,tPlay=!reduce,sPlay=!reduce,last=performance.now(),visible=true;
+  const HOLD=8,TAWAF=5.5;
+  const tOverlay=get('tawafSvg-complete'),sOverlay=get('saiSvg-complete');
+  function completion(overlay,done){overlay.classList.toggle('is-visible',done);overlay.setAttribute('aria-hidden',String(!done));overlay.inert=!done;overlay.parentElement.classList.toggle('completed',done);}
+  function render(){
+    const completeRounds=tDone?7:Math.floor(tp),frac=tDone?0:tp-Math.floor(tp),a=-Math.PI/2-frac*2*Math.PI;
+    const x=150+118*Math.cos(a),y=150+118*Math.sin(a);
+    for(const id of ['pilgrim','pilgrimGlow']){get(id).setAttribute('cx',x);get(id).setAttribute('cy',y);}
+    get('tawafArc').setAttribute('d',frac<.002?'':`M150 32 A118 118 0 ${frac>.5?1:0} 0 ${x.toFixed(2)} ${y.toFixed(2)}`);
+    get('tawafN').textContent=tDone?7:Math.floor(tp)+1;
+    tawafDots.forEach((d,i)=>d.setAttribute('fill',i<completeRounds?'#D6B472':'rgba(214,186,128,.25)'));
+    get('walker').setAttribute('cx',wx);get('walkerGlow').setAttribute('cx',wx);
+    get('saiN').textContent=sDone?7:lap+1;
+    get('saiDir').textContent=sDone?'Complete':lap%2===0?'Safa → Marwah':'Marwah → Safa';
+    const fast=wx>128&&wx<212;
+    get('saiPace').textContent=sDone?'':fast?'moving faster':'walking';
+    get('walkerGlow').setAttribute('fill',fast?'rgba(140,220,180,.25)':'rgba(243,223,176,.18)');
+    saiDots.forEach((d,i)=>d.setAttribute('fill',i<(sDone?7:lap)?'#D6B472':'rgba(214,186,128,.2)'));
+    completion(tOverlay,tDone);completion(sOverlay,sDone);
+    get('tawafStep').textContent=tDone?'Replay':'Next round';get('saiStep').textContent=sDone?'Replay':'Next lap';
+    for(const [id,playing] of [['tawafPlay',tPlay],['saiPlay',sPlay]]){get(id).textContent=playing?'Pause':'Play';get(id).setAttribute('aria-pressed',String(playing));}
   }
-  function stepSai(dt) {
-    const forward = lap % 2 === 0;
-    wx += (forward ? 1 : -1) * speedAt(wx) * dt;
-    if (forward && wx >= X1) { wx = X1; lap++; } else if (!forward && wx <= X0) { wx = X0; lap++; }
-    if (lap >= 7) { lap = 0; wx = X0; }
-  }
-  function loop(now) {
-    const dt = Math.min(.05, (now - last) / 1000); last = now;
-    if (visible) {
-      if (tPlay) { tp += dt / TAWAF_SEC; if (tp >= 7) tp = 0; }
-      if (sPlay) stepSai(dt);
+  function resetT(){tp=0;tDone=false;tWait=0;}
+  function resetS(){lap=0;wx=40;sDone=false;sWait=0;}
+  function finishT(){tp=7;tDone=true;tWait=0;}
+  function finishS(){lap=7;wx=300;sDone=true;sWait=0;}
+  function loop(now){const dt=Math.min(.05,(now-last)/1000);last=now;
+    if(visible&&!document.hidden){
+      if(tPlay){if(tDone){tWait+=dt;if(tWait>=HOLD)resetT();}else{tp+=dt/TAWAF;if(tp>=7)finishT();}}
+      if(sPlay){if(sDone){sWait+=dt;if(sWait>=HOLD)resetS();}else{
+        const forward=lap%2===0,fast=wx>128&&wx<212;
+        wx+=(forward?1:-1)*(fast?95:34)*dt;
+        if((forward&&wx>=300)||(!forward&&wx<=40)){wx=forward?300:40;lap++;if(lap>=7)finishS();}
+      }}
       render();
-    }
-    requestAnimationFrame(loop);
+    }requestAnimationFrame(loop);
   }
-  const tog = (btn, get, set) => btn.addEventListener('click', () => { set(!get()); btn.textContent = get() ? 'Pause' : 'Play'; btn.setAttribute('aria-pressed', get()); });
-  tog(document.getElementById('tawafPlay'), () => tPlay, v => tPlay = v);
-  tog(document.getElementById('saiPlay'), () => sPlay, v => sPlay = v);
-  document.getElementById('tawafStep').addEventListener('click', () => { tp = (Math.floor(tp) + 1) % 7; render(); });
-  document.getElementById('saiStep').addEventListener('click', () => { lap = (lap + 1) % 7; wx = lap % 2 === 0 ? X0 : X1; render(); });
-  if (reduce) { document.getElementById('tawafPlay').textContent = 'Play'; document.getElementById('saiPlay').textContent = 'Play'; tp = 2; lap = 2; }
-  const host = document.getElementById('journey');
-  if (host && 'IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(host);
-  render(); requestAnimationFrame(loop);
+  get('tawafPlay').addEventListener('click',()=>{tPlay=!tPlay;render();});
+  get('saiPlay').addEventListener('click',()=>{sPlay=!sPlay;render();});
+  get('tawafStep').addEventListener('click',()=>{if(tDone)resetT();else if(Math.floor(tp)>=6)finishT();else tp=Math.floor(tp)+1;render();});
+  get('saiStep').addEventListener('click',()=>{if(sDone)resetS();else if(lap>=6)finishS();else{lap++;wx=lap%2===0?40:300;}render();});
+  if('IntersectionObserver' in window)new IntersectionObserver(es=>{visible=es[0].isIntersecting;}).observe(get('journey'));
+  render();requestAnimationFrame(loop);
 })();

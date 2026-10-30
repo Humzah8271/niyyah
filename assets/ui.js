@@ -56,3 +56,11 @@ addEventListener('pageshow', e => { if (e.persisted && window.NIYYAH_LEAVING) { 
     els.forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
   }
 })();
+/* Close the mobile navigation with Escape or an outside click. */
+(() => {
+  const menu=document.querySelector('.mobile-menu');if(!menu)return;
+  const summary=menu.querySelector('summary');
+  menu.addEventListener('toggle',()=>summary.setAttribute('aria-label',menu.open?'Close navigation':'Open navigation'));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;summary.focus();}});
+  document.addEventListener('click',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false;});
+})();
