@@ -529,3 +529,9 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .question-panel fieldset{animation:question-in .3s ease-out}@keyframes question-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:760px){.trip-summary{display:block}.trip-summary .trip-countdown{border-left:0;padding:0;border-top:0;display:flex;flex-direction:row;align-items:baseline;gap:12px;margin:16px 0}.trip-countdown strong{font-size:2.8rem}.trip-summary h2{display:none}#trip-stage{font-size:.9rem;margin:8px 0}.date-adjust{padding-top:4px}.date-adjust[open] input{max-width:100%}#planning-tip{min-height:180px}.product-grid{gap:30px}#studio{padding-block:42px}.contact-page #contact .split{gap:25px}.talbiyah-section .dua{padding:30px 20px}.instr{min-height:330px}.page-reminder{padding-block:100px}}
 @media(prefers-reduced-motion:reduce){.brand:hover svg{transform:none}.ritual-completion,.instr>svg{transition:none}}
+/* The progress bar follows the same clock as the tips, including pauses. */
+.tip-timer{height:2px;margin:18px 0 14px;background:rgba(214,180,114,.12);overflow:hidden;border-radius:2px}
+.tip-timer i{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,var(--gold-lo),var(--gold-hi))}
+.question-panel fieldset{animation:none}
+#saiPace{white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.tip-timer i{transition:none}}

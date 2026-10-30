@@ -1,6 +1,7 @@
-/* Recommendations use current individual planning products, never overlapping bundles. */
+/* Match stated needs; use the bundle instead of overlapping individual downloads when it costs less. */
 (() => {
   const products = {
+    bundle: {name:'Complete Umrah Planner Bundle',image:'bundle.jpg',url:'4603864228',why:'The packing checklist, budget planner, itinerary, journal and greeting cards together in one set.'},
     budget: {name:'Umrah Budget Planner', image:'budget.jpg', url:'4603861064', why:'Plan your costs, keep track of savings and record spending during your trip.'},
     itinerary: {name:'Umrah Itinerary Planner', image:'itinerary.jpg', url:'4603839913', why:'Keep your flights, hotels, contacts and daily plans together.'},
     checklist: {name:'Umrah Packing Checklist', image:'checklist.jpg', url:'4603511710', why:'Work through your packing list so you can see what is ready and what is still needed.'},
@@ -13,11 +14,11 @@
   ];
   function recommend(answers) {
     if (answers.length !== 3 || answers.some((a,i) => !questions[i].choices.some(c => c[0] === a))) return [];
-    const scores = {budget:0,itinerary:1,checklist:0,journal:0};
-    scores[{later:'budget',month:'itinerary',soon:'checklist'}[answers[0]]] += 2;
-    scores[answers[1]] += 10;
-    scores[{details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]]] += 6;
-    return Object.keys(products).sort((a,b) => scores[b]-scores[a]).slice(0,3);
+    const needs = [...new Set([answers[1],{details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]]])];
+    if(answers[0]==='soon'&&!needs.includes('checklist')) needs.push('checklist');
+    // UK prices checked on the live Etsy shop, 30 October 2026, in pence.
+    const prices={budget:299,itinerary:299,checklist:499,journal:599};
+    return needs.reduce((sum,key)=>sum+prices[key],0)>899 ? ['bundle'] : needs;
   }
   function daysUntil(value, today = new Date()) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
@@ -43,7 +44,7 @@
     byId('planning-tip').innerHTML = `<h3>${title}</h3><p>${body}</p><a href="https://www.etsy.com/uk/listing/${product.url}" target="_blank" rel="noopener">View the ${product.name} on Etsy ↗</a>`;
     byId('tip-count').textContent = `Tip ${tipIndex+1} of 3`;
     byId('planning-tip').getAnimations().forEach(a=>a.cancel());
-    if(!motion.matches) byId('planning-tip').animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,easing:'ease-out'});tipElapsed=0;
+    if(!motion.matches) byId('planning-tip').animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,easing:'ease-out'});tipElapsed=0;byId('tip-timer-fill').style.transform='scaleX(0)';
   }
   byId('tip-prev').addEventListener('click',()=>{tipIndex=(tipIndex+2)%3;showTip();});
   byId('tip-next').addEventListener('click',()=>{tipIndex=(tipIndex+1)%3;showTip();});
@@ -54,7 +55,8 @@
   new IntersectionObserver(entries=>{tipsVisible=entries[0].isIntersecting;}).observe(tipCard);
   function tickTips(now){const elapsed=Math.min(now-tipLast,100);tipLast=now;
     if(!tipsPaused&&tipsVisible&&!document.hidden&&!tipCard.matches(':hover')&&!tipCard.contains(document.activeElement))tipElapsed+=elapsed;
-    if(tipElapsed>=8500){tipIndex=(tipIndex+1)%tips.length;showTip();}requestAnimationFrame(tickTips);
+    if(tipElapsed>=8500){tipIndex=(tipIndex+1)%tips.length;showTip();}
+    byId('tip-timer-fill').style.transform=`scaleX(${Math.min(1,tipElapsed/8500)})`;requestAnimationFrame(tickTips);
   }
   syncTips();requestAnimationFrame(tickTips);
   byId('question-fields').innerHTML = questions.map((q,i)=>`<fieldset data-question="${i}" ${i?'hidden':''}><legend tabindex="-1">${q.title}</legend><p class="choice-hint">Choose one to move to the next question.</p><div class="planning-choices">${q.choices.map(([value,label])=>`<label><input type="radio" name="q${i}" value="${value}"><span>${label}</span></label>`).join('')}</div></fieldset>`).join('');
@@ -65,6 +67,8 @@
     document.querySelectorAll('.question-bars i').forEach((el,i)=>el.classList.toggle('complete',i<=step));
     byId('question-back').hidden=step===0;
     byId('question-error').textContent='';
+    const field=document.querySelector(`[data-question="${step}"]`);field.getAnimations().forEach(a=>a.cancel());
+    if(focus&&!motion.matches)field.animate([{opacity:0,transform:'translateY(16px)'},{opacity:1,transform:'translateY(0)'}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});
     if(focus) {const title=document.querySelector(`[data-question="${step}"] legend`);title.focus({preventScroll:true});title.scrollIntoView({block:'nearest',behavior:'auto'});}
   }
   function updateSummary() {
@@ -77,19 +81,23 @@
     answers[index]=input.value;
     if(index===0){byId('trip-date').value='';updateCountdown();}
     updateSummary();clearTimeout(advanceTimer);
-    advanceTimer=setTimeout(()=>{if(step<2){step++;showQuestion();}else showResults();},220);
+    const field=input.closest('fieldset');field.getAnimations().forEach(a=>a.cancel());
+    if(!motion.matches)field.animate([{opacity:1,transform:'translateY(0)'},{opacity:0,transform:'translateY(-8px)'}],{duration:220,fill:'forwards',easing:'ease-in'});
+    advanceTimer=setTimeout(()=>{field.getAnimations().forEach(a=>a.cancel());if(step<2){step++;showQuestion();}else showResults();},motion.matches?0:230);
   }
   form.addEventListener('click',choose);
   form.addEventListener('change',choose);
   form.addEventListener('submit',event=>event.preventDefault());
   function showResults(focus=true){
     const selection = recommend(answers);
+    byId('results-title').textContent=selection.length===1?'A good fit for your plans':'Your planning essentials';
+    document.querySelector('.results-intro').textContent=selection[0]==='bundle'?'The bundle covers the planning tools that match your answers for less than buying those downloads separately. You only need this set, not the individual copies too.':selection.length===1?'This covers the main thing you asked for. There’s no need to add more.':'These cover different parts of your plans. Choose what would be useful to you.';
     byId('recommendations').innerHTML=selection.map((key,i)=>{
       const p=products[key];
-      const match = key===answers[1] ? 'For your main focus' : key==={details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]] ? 'For what matters to you' : 'To help you prepare';
+      const match = key==='bundle' ? 'Your needs, together in one set' : key===answers[1] ? 'For your main focus' : key==={details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]] ? 'For what matters to you' : 'To help you prepare';
       return `<article class="planning-product"><img src="img/${p.image}" alt="${p.name}" width="160" height="120"><div><span class="match-label">${match}</span><h3>${p.name}</h3><p>${p.why}</p><a href="https://www.etsy.com/uk/listing/${p.url}" target="_blank" rel="noopener">View on Etsy ↗</a></div></article>`;
     }).join('');
-    form.hidden=true;byId('planning-results').hidden=false;if(focus){byId('results-title').focus({preventScroll:true});byId('results-title').scrollIntoView({block:'start',behavior:'auto'});}
+    form.hidden=true;byId('planning-results').hidden=false;if(focus&&!motion.matches)byId('planning-results').animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:450,easing:'ease-out'});if(focus){byId('results-title').focus({preventScroll:true});byId('results-title').scrollIntoView({block:'start',behavior:'auto'});}
   }
   byId('question-back').addEventListener('click',()=>{clearTimeout(advanceTimer);step=Math.max(0,step-1);showQuestion();});
   const dateInput=byId('trip-date');

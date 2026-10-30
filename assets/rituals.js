@@ -21,7 +21,7 @@
     get('saiN').textContent=sDone?7:lap+1;
     get('saiDir').textContent=sDone?'Complete':lap%2===0?'Safa → Marwah':'Marwah → Safa';
     const fast=wx>128&&wx<212;
-    get('saiPace').textContent=sDone?'':fast?'moving faster':'walking';
+    get('saiPace').textContent=sDone?'':fast?'Jogging':'Walking';
     get('walkerGlow').setAttribute('fill',fast?'rgba(140,220,180,.25)':'rgba(243,223,176,.18)');
     saiDots.forEach((d,i)=>d.setAttribute('fill',i<(sDone?7:lap)?'#D6B472':'rgba(214,186,128,.2)'));
     completion(tOverlay,tDone);completion(sOverlay,sDone);
