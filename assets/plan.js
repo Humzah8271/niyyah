@@ -52,7 +52,7 @@
     byId('question-back').hidden=step===0;
     byId('question-next').textContent=step===2?'See my suggestions →':'Continue →';
     byId('question-error').textContent='';
-    if(focus) document.querySelector(`[data-question="${step}"] legend`).focus();
+    if(focus) {const title=document.querySelector(`[data-question="${step}"] legend`);title.focus({preventScroll:true});title.scrollIntoView({block:'nearest',behavior:'auto'});}
   }
   function updateSummary() {
     byId('trip-stage').textContent = answers[0] ? {exploring:'You’re exploring your options.',planning:'You’re working out your travel plans.',booked:'Your trip is booked. Time to get ready.'}[answers[0]] : 'A few answers will help us get started.';
@@ -73,7 +73,7 @@
       const match = key===answers[1] ? 'For your main focus' : key==={details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]] ? 'For what matters to you' : 'To help you prepare';
       return `<article class="planning-product"><img src="img/${p.image}" alt="${p.name}" width="160" height="120"><div><span class="match-label">${match}</span><h3>${p.name}</h3><p>${p.why}</p><a href="https://www.etsy.com/uk/listing/${p.url}" target="_blank" rel="noopener">View on Etsy ↗</a></div></article>`;
     }).join('');
-    form.hidden=true;byId('planning-results').hidden=false;byId('results-title').focus();
+    form.hidden=true;byId('planning-results').hidden=false;byId('results-title').focus({preventScroll:true});byId('results-title').scrollIntoView({block:'start',behavior:'auto'});
   });
   byId('question-back').addEventListener('click',()=>{step--;showQuestion();});
   byId('edit-answers').addEventListener('click',()=>{step=0;showQuestion();});
@@ -92,5 +92,5 @@
   }
   dateInput.addEventListener('input',updateCountdown);
   byId('start-again').addEventListener('click',()=>{answers=[null,null,null];step=0;form.reset();dateInput.value='';updateSummary();updateCountdown();showQuestion();});
-  showTip();showQuestion(false);byId('planner').hidden=false;
+  showTip();showQuestion(false);byId('planner').hidden=false;document.querySelector('.tip-controls').hidden=false;
 })();
