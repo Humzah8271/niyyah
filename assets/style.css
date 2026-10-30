@@ -393,7 +393,7 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .nav .wrap{justify-content:space-between}
 .nav ul{gap:24px}
 .nav ul a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem}
-.mobile-menu{display:none;position:relative}
+.mobile-menu{display:none;position:relative;border:0}.mobile-menu:first-of-type{border-top:0}
 .mobile-menu summary{cursor:pointer;padding:10px 18px;min-height:44px;border:1px solid var(--edge);border-radius:24px;color:var(--gold-hi)}
 .mobile-menu nav{position:absolute;right:0;top:calc(100% + 12px);width:min(280px,calc(100vw - 40px));padding:12px;background:#0F1E19;border:1px solid var(--edge);border-radius:16px;box-shadow:0 16px 40px #0008}
 .mobile-menu nav a{display:block;padding:12px;text-decoration:none;border-radius:8px}
