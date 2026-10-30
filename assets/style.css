@@ -387,3 +387,49 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .contact .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .cf-status{margin:0;font-size:.95rem;color:var(--gold-hi);min-height:1.4em}
 .cf-status.err{color:#e3a99a}
+/* Clear navigation and a quieter landing page. */
+:root{--muted:#AFBCB5;--dim:#9BAAA2}
+#sky{height:100lvh;inset:0 0 auto}
+.nav .wrap{justify-content:space-between}
+.nav ul{gap:24px}
+.nav ul a{display:inline-flex;align-items:center;min-height:44px;font-size:.95rem}
+.mobile-menu{display:none;position:relative}
+.mobile-menu summary{cursor:pointer;padding:10px 18px;min-height:44px;border:1px solid var(--edge);border-radius:24px;color:var(--gold-hi)}
+.mobile-menu nav{position:absolute;right:0;top:calc(100% + 12px);width:min(280px,calc(100vw - 40px));padding:12px;background:#0F1E19;border:1px solid var(--edge);border-radius:16px;box-shadow:0 16px 40px #0008}
+.mobile-menu nav a{display:block;padding:12px;text-decoration:none;border-radius:8px}
+.mobile-menu nav a:hover{background:#ffffff09;color:var(--gold-hi)}
+.skip-link{position:fixed;top:8px;left:12px;z-index:100;padding:12px 20px;background:var(--gold-hi);color:var(--void);transform:translateY(-160%)}
+.skip-link:focus{transform:translateY(0)}
+.home{max-width:1000px;margin:auto}
+.home-opening{text-align:center;padding-top:clamp(28px,5vw,64px)}
+.home-bismillah .ar-text{color:var(--gold-hi);font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.8}
+.home-bismillah p+p{color:var(--muted);font-size:.95rem;max-width:48ch;margin:8px auto 0}
+.home-definition{margin:36px auto 16px;color:var(--gold);font-size:1rem}
+.home-definition span{font-family:var(--arabic);font-size:1.5rem;margin-right:12px}
+.home h1{font-size:clamp(2.6rem,6vw,4.5rem);line-height:1.12}
+.home h1 em{color:var(--gold-hi);font-weight:400}
+.home-intro{margin:22px auto 0;color:var(--muted);max-width:45ch;font-size:1.05rem}
+.home-destinations{padding-top:44px;padding-bottom:48px}
+.home-destinations h2{font-family:var(--body);font-size:1rem;font-weight:500;text-align:center;margin-bottom:22px;line-height:1.5;color:var(--muted)}
+.destination-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.destination{display:flex;justify-content:space-between;align-items:center;gap:18px;text-decoration:none;padding:24px 26px;border:1px solid rgba(214,186,128,.26);border-radius:16px;background:rgba(15,30,25,.8);transition:background .2s,border-color .2s}
+.destination:hover{background:#182d25;border-color:var(--gold)}
+.destination h3{font-size:1.7rem;font-weight:400;line-height:1.2}
+.destination p{margin-top:8px;font-size:.95rem;line-height:1.6;color:var(--muted)}
+.destination>span+span{color:var(--gold);font-size:1.5rem}
+.home-about{display:table;margin:20px auto 0;padding:12px;color:var(--gold-hi);text-underline-offset:5px;font-size:1rem}
+.simple-footer .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 32px;padding-block:28px}
+.footer-name{font-family:var(--display);font-size:1.8rem;text-decoration:none}
+.footer-name span{display:block;font-family:var(--body);font-size:.9rem;color:var(--muted)}
+.simple-footer nav{display:flex;gap:8px 20px;flex-wrap:wrap}
+.simple-footer nav a{display:inline-flex;align-items:center;min-height:44px;font-size:.9rem;color:var(--muted);text-underline-offset:4px}
+.simple-footer p{flex-basis:100%;font-size:.85rem;color:var(--muted)}
+.contact label{font-family:var(--body);font-size:1rem;letter-spacing:0;text-transform:none}
+.social a{min-width:44px;min-height:44px}
+.dot{height:44px;background:transparent;position:relative}
+.dot::after{content:'';position:absolute;left:0;right:0;top:20px;height:4px;border-radius:2px;background:rgba(214,180,114,.35)}
+.dot[aria-current="true"]{background:transparent}
+.dot[aria-current="true"]::after{background:var(--gold)}
+@media(max-width:880px){.mobile-menu{display:block}.nav .wrap{gap:16px}.nav-shell{opacity:1}}
+@media(max-width:600px){.destination-grid{grid-template-columns:1fr}.home-opening{padding-top:24px}.home-definition{margin-top:28px}.home-destinations{padding-top:32px}.destination{padding:20px}.home h1{font-size:clamp(2.3rem,9vw,3.2rem)}.simple-footer .wrap{align-items:flex-start}.simple-footer nav{gap:4px 18px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
