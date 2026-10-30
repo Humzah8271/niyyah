@@ -433,3 +433,21 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 @media(max-width:880px){.mobile-menu{display:block}.nav .wrap{gap:16px}.nav-shell{opacity:1}}
 @media(max-width:600px){.destination-grid{grid-template-columns:1fr}.home-opening{padding-top:24px}.home-definition{margin-top:28px}.home-destinations{padding-top:32px}.destination{padding:20px}.home h1{font-size:clamp(2.3rem,9vw,3.2rem)}.simple-footer .wrap{align-items:flex-start}.simple-footer nav{gap:4px 18px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+/* A gentle welcome, followed by clear next steps. */
+.home-welcome{margin:32px auto 0;max-width:48ch}
+.home-welcome h2{font-family:var(--body);font-size:1.1rem;line-height:1.5;font-weight:500;color:var(--gold-hi)}
+.home-welcome .home-intro{margin-top:12px;line-height:1.8;text-wrap:pretty}
+.home-destinations{padding-top:52px}
+.home-destinations h2{margin-bottom:24px}
+@media(max-width:600px){
+  .home-opening{padding-top:22px}
+  .home-bismillah .ar-text{font-size:1.7rem;line-height:1.7}
+  .home-bismillah p+p{font-size:.9rem;margin-top:8px}
+  .home-definition{margin:26px auto 16px}
+  .home h1{font-size:clamp(2.1rem,8.5vw,2.8rem);line-height:1.16}
+  .home-welcome{margin-top:26px}
+  .home-welcome .home-intro{font-size:1rem;line-height:1.75;max-width:32ch}
+  .home-destinations{padding-top:36px}
+  .home-destinations h2{margin-bottom:22px}
+  .destination{padding:22px}
+}

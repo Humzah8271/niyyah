@@ -8,14 +8,14 @@
     const big = document.getElementById('daysLeft'), unit = document.getElementById('daysUnit');
     const when = document.getElementById('todoWhen'), title = document.getElementById('todoTitle'), list = document.getElementById('todoList');
     const plan = [
-      { min: 90, when: '3 months or more before', title: 'Save, choose and learn',
-        items: ['Set a budget and start saving', 'Check your passport has 6+ months left on your return date', 'Choose a licensed, well-reviewed travel agent', 'Start learning the steps of Umrah and their duas', 'Walk more to build stamina'] },
-      { min: 35, when: '1 to 3 months before', title: 'Get the paperwork moving',
+      { min: 90, when: '3 months or more before', title: 'Start planning',
+        items: ['Set a budget and start saving', 'Check your passport has 6+ months left on your return date', 'Choose a licensed, well-reviewed travel agent', 'Start learning the steps of Umrah and their duas', 'Build up your walking gradually'] },
+      { min: 35, when: '1 to 3 months before', title: 'Sort your travel documents',
         items: ['Apply for your visa', 'Check vaccinations with your GP or a travel clinic', 'Book flights and hotels', 'Buy travel insurance', 'Plan your days in Makkah and Madinah'] },
       { min: 8, when: '1 to 5 weeks before', title: 'Gather what you need',
-        items: ['Buy ihram, a belt and sandals', 'Download the Nusuk app and check your permits', 'Order personalised gifts now: they take about a week to arrive', 'Ask family and friends what to pray for', 'Print documents and save copies on your phone'] },
+        items: ['Buy ihram, a belt and sandals', 'Download the Nusuk app and check your permits', 'If ordering gifts, check the estimated delivery date', 'Ask family and friends what to pray for', 'Print documents and save copies on your phone'] },
       { min: 0, when: 'The final week', title: 'Pack and prepare',
-        items: ['Pack using the checklist (it downloads instantly)', 'Cut nails, trim and wash before ihram', 'Charge your phone and power bank', 'Put your ihram in your hand luggage', 'Check your flight time and your miqat point'] }];
+        items: ['Pack your bag and check your list', 'Cut nails, trim and wash before ihram', 'Charge your phone and power bank', 'Put your ihram in your hand luggage', 'Check your flight time and your miqat point'] }];
     const d0 = new Date(); d0.setDate(d0.getDate() + 56); inp.value = d0.toISOString().slice(0, 10);
     inp.min = new Date().toISOString().slice(0, 10);
     let shown = 0;

@@ -30,7 +30,7 @@
     const forward = lap % 2 === 0;
     sn.textContent = lap + 1; sd.textContent = forward ? 'Safa → Marwah' : 'Marwah → Safa';
     const brisk = wx > G0 && wx < G1;
-    if (pace) pace.textContent = brisk ? 'brisk' : 'walking';
+    if (pace) pace.textContent = brisk ? 'moving faster' : 'walking';
     wg.setAttribute('fill', brisk ? 'rgba(140,220,180,.25)' : 'rgba(243,223,176,.18)');
     dotEls.forEach((c, i) => c.setAttribute('fill', i < lap ? '#D6B472' : 'rgba(214,186,128,.2)'));
   }

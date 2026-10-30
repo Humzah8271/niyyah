@@ -6,7 +6,7 @@
 <style>:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Niyyah · Journey</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Count the seven circuits of tawaf and seven laps of sa'i.">
+<meta name="description" content="Practise counting the rounds of tawaf and laps of sa’i before your Umrah.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="img/icon-32.png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261030-redesign">
+<link rel="stylesheet" href="assets/style.css?v=20261030-copy">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to content</a>
@@ -35,13 +35,13 @@
   </div>
 </header>
 <main id="main-content">
-  <section class="page-head"><div class="wrap"><span class="label">The journey</span><h1>Tawaf and sa’i</h1><p>Explore seven circuits of tawaf and seven laps of sa’i with these visual counters. Play, pause or step through each one.</p></div></section>
+  <section class="page-head"><div class="wrap"><span class="label">The journey</span><h1>Tawaf and sa’i</h1><p>Use these animations to practise counting the seven rounds of tawaf and seven laps of sa’i before you go. Pause them or move through one at a time.</p></div></section>
   <section id="journey" aria-label="Tawaf and sa'i" style="padding-top:30px">
     <div class="wrap">
       <div class="rituals">
         <article class="panel reveal" aria-labelledby="t-tawaf">
-          <div class="ph"><h3 id="t-tawaf">Tawaf</h3><span class="label">Circuits</span></div>
-          <p>Seven circuits anticlockwise, starting from the line of the Black Stone, with the Kaaba on your left.</p>
+          <div class="ph"><h3 id="t-tawaf">Tawaf</h3><span class="label">Rounds</span></div>
+          <p>Walk around the Kaaba seven times, keeping it on your left. Each round starts and ends in line with the Black Stone.</p>
           <div class="instr">
             <svg viewBox="0 0 300 300" id="tawafSvg" aria-hidden="true">
               <defs><radialGradient id="kg" cx="50%" cy="40%"><stop offset="0" stop-color="#2A2A26"/><stop offset="1" stop-color="#0C0C0A"/></radialGradient></defs>
@@ -56,11 +56,11 @@
               <circle id="pilgrimGlow" cx="150" cy="32" r="16" fill="rgba(243,223,176,.18)"/>
             </svg>
           </div>
-          <div class="readout"><span>Circuit <b id="tawafN">1</b> / 7</span><div class="ctrls"><button class="ctrl" id="tawafPlay" aria-pressed="true">Pause</button><button class="ctrl" id="tawafStep">Next</button></div></div>
+          <div class="readout"><span>Round <b id="tawafN">1</b> / 7</span><div class="ctrls"><button class="ctrl" id="tawafPlay" aria-pressed="true">Pause</button><button class="ctrl" id="tawafStep">Next round</button></div></div>
         </article>
         <article class="panel reveal" aria-labelledby="t-sai">
           <div class="ph"><h3 id="t-sai">Sa'i</h3><span class="label">Laps</span></div>
-          <p>Seven laps between Safa and Marwah. Safa to Marwah counts as one, Marwah back to Safa as two, ending at Marwah. Men walk briskly between the green lights.</p>
+          <p>Go between Safa and Marwah seven times. Safa to Marwah is lap one, and the return to Safa is lap two. The final lap ends at Marwah. Men move faster between the green lights.</p>
           <div class="instr">
             <svg viewBox="0 0 340 170" id="saiSvg" aria-hidden="true">
               <line x1="40" y1="96" x2="300" y2="96" stroke="rgba(214,186,128,.18)" stroke-width="18" stroke-linecap="round"/>
@@ -76,14 +76,14 @@
               <circle id="walkerGlow" cx="40" cy="96" r="17" fill="rgba(243,223,176,.18)"/>
             </svg>
           </div>
-          <div class="readout"><span>Lap <b id="saiN">1</b> / 7 · <span id="saiDir">Safa → Marwah</span> · <span id="saiPace">walking</span></span><div class="ctrls"><button class="ctrl" id="saiPlay" aria-pressed="true">Pause</button><button class="ctrl" id="saiStep">Next</button></div></div>
+          <div class="readout"><span>Lap <b id="saiN">1</b> / 7 · <span id="saiDir">Safa → Marwah</span> · <span id="saiPace">walking</span></span><div class="ctrls"><button class="ctrl" id="saiPlay" aria-pressed="true">Pause</button><button class="ctrl" id="saiStep">Next lap</button></div></div>
         </article>
       </div>
       <ol class="steps reveal">
-        <li><span class="k">01 · MIQAT</span><h4>Ihram</h4><p>Make your intention and enter ihram before the miqat. On a direct flight to Jeddah this happens on the plane.</p></li>
-        <li><span class="k">02 · ×7</span><h4>Tawaf</h4><p>Seven circuits of the Kaaba, then pray two rak'ahs.</p></li>
+        <li><span class="k">01 · MIQAT</span><h4>Ihram</h4><p>Make your intention and enter ihram before crossing the miqat, the boundary for entering ihram. If you fly directly to Jeddah, prepare to do this on the plane.</p></li>
+        <li><span class="k">02 · ×7</span><h4>Tawaf</h4><p>Walk around the Kaaba seven times, then pray two rak'ahs.</p></li>
         <li><span class="k">03 · ×7</span><h4>Sa'i</h4><p>Seven laps between Safa and Marwah.</p></li>
-        <li><span class="k">04 · DONE</span><h4>Halq or taqsir</h4><p>Men shave or shorten their hair; women trim a small amount.</p></li>
+        <li><span class="k">04 · DONE</span><h4>Shaving or trimming the hair</h4><p>Men shave or shorten their hair; women trim a small amount.</p></li>
       </ol>
       
       <article class="panel dua reveal" style="margin-top:22px">
@@ -93,7 +93,7 @@
         <p class="en">“Here I am, O Allah, here I am. Here I am, You have no partner, here I am. All praise, all blessings and all sovereignty belong to You. You have no partner.”</p>
         <cite>Sahih al-Bukhari 1549 · Sahih Muslim 1184 · said once you have entered ihram</cite>
       </article>
-      <p class="note"><b>An overview, not a ruling.</b> Our full guide covers every step with each dua in Arabic, transliteration and English, and it is being reviewed by a qualified scholar before it goes on sale. Where scholars differ, follow your own scholar or group leader.</p>
+      <p class="note"><b>A short introduction to help you prepare.</b> These animations are for practice; they do not track your progress during Umrah. Our full guide will be available after review by a qualified scholar. For religious questions, ask your scholar or group leader.</p>
     </div>
   </section>
   <section class="verse"><div class="wrap reveal"><p class="ar-text" lang="ar">وَأَتِمُّوا الْحَجَّ وَالْعُمْرَةَ لِلَّهِ</p><blockquote>“And complete the Hajj and Umrah for Allah.”<cite>Quran · Al-Baqarah 2:196</cite></blockquote></div></section>
@@ -105,7 +105,7 @@
   <p>© 2026 Niyyah · UK</p>
 </div></footer>
 <script src="assets/ui.js"></script>
-<script src="assets/sky.js?v=20261030-redesign"></script>
-<script src="assets/rituals.js"></script>
+<script src="assets/sky.js?v=20261030-copy"></script>
+<script src="assets/rituals.js?v=20261030-copy"></script>
 </body>
 </html>
