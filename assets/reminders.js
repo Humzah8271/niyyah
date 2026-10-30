@@ -4,7 +4,6 @@
   if (!section) return;
   const slides = [...section.querySelectorAll('.reminder-slide')];
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const toggle = section.querySelector('.reminder-toggle');
   let index = 0, paused = motion.matches, elapsed = 0, last = performance.now();
   function show(next) {
     index = next % slides.length;
@@ -13,19 +12,13 @@
       slide.setAttribute('aria-hidden', String(i !== index));
       slide.inert = i !== index;
     });
-    section.querySelector('.reminder-count').textContent = `${index + 1} / ${slides.length}`;
   }
-  function sync() { toggle.textContent = paused ? '▶' : 'Ⅱ'; toggle.setAttribute('aria-label', paused ? 'Play Quran reminders' : 'Pause Quran reminders'); }
-  toggle.addEventListener('click', () => {paused = !paused; last = performance.now(); sync();});
-  section.querySelector('.reminder-next').addEventListener('click', () => {show(index + 1); elapsed = 0; last = performance.now();});
-  motion.addEventListener('change', () => {paused = motion.matches; last = performance.now(); sync();});
-  section.querySelector('.reminder-controls').hidden = false;
-  sync();
+  motion.addEventListener('change', () => {paused = motion.matches; last = performance.now();});
   setInterval(() => {
     const now = performance.now();
     if (!paused) elapsed += now - last;
     last = now;
-    if (elapsed >= 5000) {show(index + Math.floor(elapsed / 5000)); elapsed %= 5000;}
+    if (elapsed >= 8000) {show(index + Math.floor(elapsed / 8000)); elapsed %= 8000;}
   }, 100);
 
   // One shared minute clock across page navigation in this browser tab.
