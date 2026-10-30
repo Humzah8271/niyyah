@@ -557,3 +557,28 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
   .home .home-about{font-size:.85rem;margin-top:24px}
   .home .page-reminder{padding-block:80px;margin-top:0}
 }
+/* Keep the optional exact date after the questions on every screen. */
+.date-after{grid-column:1/-1;border:0;padding:0;text-align:center}
+.date-after #date-fields{max-width:420px;margin:20px auto 0;padding:24px;text-align:left;background:rgba(15,30,25,.7);border:1px solid var(--edge);border-radius:16px}
+.date-after label{display:block;color:var(--gold-hi);margin-bottom:12px}
+.date-after input{display:block;width:100%;min-width:0;min-height:48px;padding:12px;border:1px solid var(--edge);border-radius:10px;font:inherit;background:var(--void);color:var(--text);color-scheme:dark}
+.date-after #date-help{line-height:1.7;margin-top:12px}
+.date-after button[aria-expanded="true"] span{transform:rotate(45deg)}
+.date-after button span{display:inline-block;transition:transform .2s}
+/* All three passages reserve their space, so changing verse never moves the page. */
+.page-reminder{position:relative;isolation:isolate;overflow:hidden}
+.page-reminder>.wrap{position:relative;z-index:1}
+.reminder-slides{display:grid;align-items:center}
+.reminder-slide{grid-area:1/1;min-width:0;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .65s ease,visibility .65s}
+.reminder-slide.is-active{opacity:1;visibility:visible;pointer-events:auto}
+.reminder-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:24px;color:var(--muted);font:400 .7rem var(--mono)}
+.reminder-controls button{width:44px;height:44px;border:1px solid var(--edge);border-radius:50%;color:var(--gold);background:transparent;cursor:pointer}
+.shooting-star{position:absolute;z-index:0;pointer-events:none;width:90px;height:1px;background:linear-gradient(90deg,transparent,rgba(243,223,176,.8));border-radius:50%;box-shadow:0 0 4px rgba(243,223,176,.2)}
+.about-boundaries h2{font:400 clamp(1.9rem,4vw,2.7rem)/1.2 var(--display);color:var(--text)}
+#groups{padding-block:48px}
+@media(max-width:760px){
+  .js .reveal.pre{transform:none;opacity:.35}
+  .reveal{transition:opacity .45s ease-out}
+  #groups .split{gap:24px}
+}
+@media(prefers-reduced-motion:reduce){.reminder-slide{transition:none}.shooting-star{display:none}.js .reveal.pre{opacity:1}}

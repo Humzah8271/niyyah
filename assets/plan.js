@@ -33,7 +33,7 @@
   const byId = id => document.getElementById(id);
   let step = 0, answers = [null,null,null], tipIndex = 0, advanceTimer;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  let tipsPaused=motion.matches, tipsVisible=false, tipElapsed=0, tipLast=performance.now();
+  let tipsPaused=motion.matches, tipElapsed=0, tipLast=performance.now();
   const tips = [
     ['Start with your budget','Write down the main costs first: travel, accommodation and everyday spending. A rough plan is enough to get started.','budget'],
     ['Keep your plans together','Put your flight details, hotel bookings and important contacts in one place, so they’re easy to find when you need them.','itinerary'],
@@ -48,14 +48,12 @@
   }
   byId('tip-prev').addEventListener('click',()=>{tipIndex=(tipIndex+2)%3;showTip();});
   byId('tip-next').addEventListener('click',()=>{tipIndex=(tipIndex+1)%3;showTip();});
-  const tipCard=document.querySelector('.tip-card');
   function syncTips(){byId('tip-toggle').textContent=tipsPaused?'▶':'Ⅱ';byId('tip-toggle').setAttribute('aria-label',tipsPaused?'Play tips':'Pause tips');}
   byId('tip-toggle').addEventListener('click',()=>{tipsPaused=!tipsPaused;syncTips();});
   motion.addEventListener('change',()=>{tipsPaused=motion.matches;syncTips();});
-  new IntersectionObserver(entries=>{tipsVisible=entries[0].isIntersecting;}).observe(tipCard);
-  function tickTips(now){const elapsed=Math.min(now-tipLast,100);tipLast=now;
-    if(!tipsPaused&&tipsVisible&&!document.hidden&&!tipCard.matches(':hover')&&!tipCard.contains(document.activeElement))tipElapsed+=elapsed;
-    if(tipElapsed>=8500){tipIndex=(tipIndex+1)%tips.length;showTip();}
+  function tickTips(now){const elapsed=now-tipLast;tipLast=now;
+    if(!tipsPaused)tipElapsed+=elapsed;
+    if(tipElapsed>=8500){const remainder=tipElapsed%8500;tipIndex=(tipIndex+Math.floor(tipElapsed/8500))%tips.length;showTip();tipElapsed=remainder;}
     byId('tip-timer-fill').style.transform=`scaleX(${Math.min(1,tipElapsed/8500)})`;requestAnimationFrame(tickTips);
   }
   syncTips();requestAnimationFrame(tickTips);
@@ -114,6 +112,7 @@
     }
   }
   dateInput.addEventListener('input',()=>{updateCountdown();const days=daysUntil(dateInput.value);if(days!==null&&days>=0){answers[0]=days>30?'later':days>14?'month':'soon';const radio=document.querySelector(`[name="q0"][value="${answers[0]}"]`);if(radio)radio.checked=true;updateSummary();byId('trip-stage').textContent='Countdown to your chosen date.';if(!byId('planning-results').hidden)showResults(false);}});
-  byId('start-again').addEventListener('click',()=>{clearTimeout(advanceTimer);answers=[null,null,null];step=0;form.reset();dateInput.value='';document.querySelector('.date-adjust').open=false;updateSummary();updateCountdown();showQuestion();});
+  byId('date-toggle').addEventListener('click',()=>{const open=byId('date-fields').hidden;byId('date-fields').hidden=!open;byId('date-toggle').setAttribute('aria-expanded',String(open));});
+  byId('start-again').addEventListener('click',()=>{clearTimeout(advanceTimer);answers=[null,null,null];step=0;form.reset();dateInput.value='';byId('date-fields').hidden=true;byId('date-toggle').setAttribute('aria-expanded','false');updateSummary();updateCountdown();showQuestion();});
   showTip();showQuestion(false);byId('planner').hidden=false;document.querySelector('.tip-controls').hidden=false;
 })();

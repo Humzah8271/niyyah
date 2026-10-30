@@ -5,13 +5,13 @@ const fine = matchMedia('(pointer: fine)').matches;
 /* every page opens at the top, unless the link points at a section (#faq) */
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 const toTop = () => { if (!location.hash) { document.documentElement.style.scrollBehavior = 'auto'; scrollTo(0, 0); document.documentElement.style.scrollBehavior = ''; } };
-toTop(); addEventListener('DOMContentLoaded', toTop);
+toTop();
 /* the moment a link to another page is pressed, stop every animation so the browser can switch pages straight away */
 document.addEventListener('click', e => {
   const a = e.target.closest && e.target.closest('a[href]'); if (!a || a.target === '_blank' || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
   const u = new URL(a.href, location.href); if (u.origin === location.origin && u.pathname !== location.pathname) window.NIYYAH_LEAVING = true;
 }, true);
-addEventListener('pageshow', e => { if (e.persisted && window.NIYYAH_LEAVING) { window.NIYYAH_LEAVING = false; location.reload(); } }); addEventListener('load', () => setTimeout(toTop, 0)); addEventListener('pageshow', toTop);
+addEventListener('pageshow', () => { window.NIYYAH_LEAVING = false; });
 /* pages load ahead of time: on hover or touch of a link, and the main pages once this one is idle, so clicks feel instant */
 (() => {
   const done = new Set([location.pathname]);
@@ -52,7 +52,7 @@ addEventListener('pageshow', e => { if (e.persisted && window.NIYYAH_LEAVING) { 
 
   const els = [...document.querySelectorAll('.reveal')];
   if (!reduce && 'IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.remove('pre'); io.unobserve(e.target); } }), { rootMargin: '0px 0px 100px 0px' });
     els.forEach(el => { if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); } });
   }
 })();

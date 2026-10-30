@@ -14,7 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261030-menu4">
+<link rel="stylesheet" href="assets/style.css?v=20261030-motion6">
 <link rel="canonical" href="https://niyyahpackages.com/plan">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
@@ -79,7 +79,7 @@
       <span class="label">Your trip</span><h2 id="summary-title">A plan at your pace</h2>
       <p id="trip-stage">A few answers will help us get started.</p>
       <div class="trip-countdown" aria-live="polite"><strong id="trip-days">Your timing</strong><span id="trip-days-label">Choose a rough time to get started.</span></div>
-      <details class="date-adjust"><summary>Set or change your date</summary><label for="trip-date">Departure date <span>(optional)</span></label><input type="date" id="trip-date" aria-describedby="date-help date-error"><p id="date-help">An exact date replaces your rough estimate. Clear it to use the estimate again.</p><p id="date-error" role="status"></p></details>
+
       <p id="trip-focus"></p>
     </aside>
     <div class="question-panel">
@@ -99,17 +99,22 @@
         <div class="question-actions"><button type="button" class="btn btn-ghost" id="start-again">Start again</button></div>
       </div>
     </div>
+    <div class="date-adjust date-after">
+      <button type="button" class="btn btn-ghost" id="date-toggle" aria-expanded="false" aria-controls="date-fields">Set or change your date <span aria-hidden="true">＋</span></button>
+      <div id="date-fields" hidden><label for="trip-date">Departure date <span>(optional)</span></label><input type="date" id="trip-date" aria-describedby="date-help date-error"><p id="date-help">An exact date replaces your rough estimate. Clear it to use the estimate again.</p><p id="date-error" role="status"></p></div>
+    </div>
   </section>
   <noscript><div class="wrap planning-fallback"><p>Turn on JavaScript to use the questions and countdown, or <a href="/shop">browse our planners in the shop</a>.</p></div></noscript>
-<section class="verse page-reminder" aria-label="A Quran reminder"><div class="wrap"><p class="ar-text" lang="ar" dir="rtl">فَإِنَّ مَعَ الْعُسْرِ يُسْرًا</p><blockquote>So, surely with hardship comes ease.<cite><a href="https://quran.com/94/5" target="_blank" rel="noopener">Quran · Ash-Sharh 94:5</a></cite></blockquote></div></section>
+<section class="verse page-reminder" aria-label="A Quran reminder"><div class="wrap"><div class="reminder-slides"><div class="reminder-slide is-active"><p class="ar-text" lang="ar" dir="rtl">فَإِنَّ مَعَ الْعُسْرِ يُسْرًا</p><blockquote>So, surely with hardship comes ease.<cite><a href="https://quran.com/94/5" target="_blank" rel="noopener">Quran · Ash-Sharh 94:5</a></cite></blockquote></div><div class="reminder-slide" aria-hidden="true" inert><p class="ar-text" lang="ar" dir="rtl">وَيَسِّرْ لِي أَمْرِي</p><blockquote>And make my task easy.<cite><a href="https://quran.com/20/26" target="_blank" rel="noopener">Quran · Ta-Ha 20:26</a></cite></blockquote></div><div class="reminder-slide" aria-hidden="true" inert><p class="ar-text" lang="ar" dir="rtl">وَأَنْ لَيْسَ لِلْإِنْسَانِ إِلَّا مَا سَعَىٰ</p><blockquote>And that each person will only have what they endeavoured towards.<cite><a href="https://quran.com/53/39" target="_blank" rel="noopener">Quran · An-Najm 53:39</a></cite></blockquote></div></div><div class="reminder-controls" hidden><button type="button" class="reminder-toggle" aria-label="Pause Quran reminders">Ⅱ</button><span class="reminder-count">1 / 3</span><button type="button" class="reminder-next" aria-label="Next Quran reminder">→</button></div></div></section>
 </main>
 <footer class="simple-footer"><div class="wrap">
   <a class="brand footer-brand" href="/" aria-label="Niyyah home"><svg aria-hidden="true"><use href="#star"/></svg><span class="wm">Niyyah<small>Packages</small></span></a>
   <nav aria-label="Footer"><a href="/contact">Contact</a><a href="/contact#faq">FAQs &amp; returns</a><a href="/privacy">Privacy</a><a href="https://www.instagram.com/niyyah.packages/" target="_blank" rel="noopener">Instagram</a><a href="https://www.tiktok.com/@niyyah.packages" target="_blank" rel="noopener">TikTok</a><a href="https://www.youtube.com/@Niyyah.Packages" target="_blank" rel="noopener">YouTube</a></nav>
   <p>© 2026 Niyyah · UK</p>
 </div></footer>
-<script src="assets/ui.js?v=20261030-flow2"></script>
-<script src="assets/sky.js?v=20261030-copy"></script>
-<script src="assets/plan.js?v=20261030-polish3"></script>
+<script src="assets/ui.js?v=20261030-motion6"></script>
+<script src="assets/sky.js?v=20261030-motion6"></script>
+<script src="assets/plan.js?v=20261030-motion6"></script>
+<script src="assets/reminders.js?v=20261030-motion6"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
-  const stars = Array.from({length:120}, () => ({
+  const stars = Array.from({length:150}, () => ({
     x:Math.random(), y:Math.random(), z:.1 + Math.random() * .9,
     phase:Math.random() * Math.PI * 2, speed:1100 * (.6 + Math.random() * 1.4)
   }));
@@ -13,8 +13,9 @@
   function paint(time) {
     ctx.clearRect(0, 0, width, height);
     ctx.fillStyle = glow; ctx.fillRect(0, 0, width, height);
-    const count = Math.min(120, Math.round(width * height / 14000));
-    for (const star of stars.slice(0, count)) {
+    const count = Math.round(Math.min(120, Math.round(width * height / 14000)) * 1.25);
+    for (let i = 0; i < count; i++) {
+      const star = stars[i];
       const twinkle = motion.matches ? .7 : .35 + .65 * Math.pow(Math.abs(Math.sin(time / star.speed + star.phase)), 3);
       ctx.fillStyle = `rgba(243,223,176,${.14 + .58 * star.z * twinkle})`;
       ctx.fillRect(star.x * width, star.y * height, star.z * 2, star.z * 2);
