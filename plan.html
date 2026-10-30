@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>:root{padding-block:env(safe-area-inset-top,0px) env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
-<title>Free Umrah Countdown &amp; Preparation Checklist | Niyyah</title>
+<title>Umrah Planning Tool &amp; Countdown | Niyyah</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Plan your Umrah with a free travel countdown and preparation checklist. Work through what to organise months, weeks and days before your journey.">
+<meta name="description" content="Answer three simple questions, add an optional travel countdown and find useful planning downloads for your Umrah.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" href="img/icon-32.png">
 <link rel="apple-touch-icon" href="img/icon-180.png">
@@ -14,19 +14,19 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Manrope:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Amiri:wght@400;700&display=swap">
-<link rel="stylesheet" href="assets/style.css?v=20261030-copy">
+<link rel="stylesheet" href="assets/style.css?v=20261030-planner">
 <link rel="canonical" href="https://niyyahpackages.com/plan">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_GB">
 <meta property="og:site_name" content="Niyyah Packages">
-<meta property="og:title" content="Free Umrah Countdown &amp; Preparation Checklist | Niyyah">
-<meta property="og:description" content="Plan your Umrah with a free travel countdown and preparation checklist. Work through what to organise months, weeks and days before your journey.">
+<meta property="og:title" content="Umrah Planning Tool &amp; Countdown | Niyyah">
+<meta property="og:description" content="Answer three simple questions, add an optional travel countdown and find useful planning downloads for your Umrah.">
 <meta property="og:url" content="https://niyyahpackages.com/plan">
 <meta property="og:image" content="https://niyyahpackages.com/img/icon-512.png">
 <meta property="og:image:alt" content="Niyyah Packages logo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Free Umrah Countdown &amp; Preparation Checklist | Niyyah">
-<meta name="twitter:description" content="Plan your Umrah with a free travel countdown and preparation checklist. Work through what to organise months, weeks and days before your journey.">
+<meta name="twitter:title" content="Umrah Planning Tool &amp; Countdown | Niyyah">
+<meta name="twitter:description" content="Answer three simple questions, add an optional travel countdown and find useful planning downloads for your Umrah.">
 <meta name="twitter:image" content="https://niyyahpackages.com/img/icon-512.png">
 <script type="application/ld+json">
 {
@@ -36,8 +36,8 @@
       "@type": "WebPage",
       "@id": "https://niyyahpackages.com/plan#webpage",
       "url": "https://niyyahpackages.com/plan",
-      "name": "Free Umrah Countdown & Preparation Checklist | Niyyah",
-      "description": "Plan your Umrah with a free travel countdown and preparation checklist. Work through what to organise months, weeks and days before your journey.",
+      "name": "Umrah Planning Tool & Countdown | Niyyah",
+      "description": "Answer three simple questions, add an optional travel countdown and find useful planning downloads for your Umrah.",
       "inLanguage": "en-GB",
       "isPartOf": {
         "@id": "https://niyyahpackages.com/#website"
@@ -65,76 +65,45 @@
     <details class="mobile-menu"><summary>Menu</summary><nav aria-label="Mobile navigation"><a href="/">Home</a><a href="/plan">Plan your Umrah</a><a href="/journey">Tawaf &amp; sa’i</a><a href="/shop">Shop</a><a href="/packages">Upcoming kits</a><a href="/about">About &amp; contact</a></nav></details>
   </div>
 </header>
-<main id="main-content">
-  <section class="page-head"><div class="wrap"><span class="label">Plan</span><h1>Plan your Umrah</h1><p>Choose your travel date for a preparation checklist, or read through the stages below at your own pace.</p></div></section>
-  <section id="countdown" aria-labelledby="count-title">
-    <div class="wrap">
-      <div class="head reveal"><span class="label">Your countdown</span><h2 id="count-title">How long until you go?</h2><p>Pick your travel date to see what to focus on now.</p></div>
-      <div class="count">
-        <div class="panel dial reveal">
-          <div><div class="big" id="daysLeft">56</div><div class="unit" id="daysUnit">days to go</div></div>
-          <label class="label" for="tDate" style="margin-top:22px;display:block">Travel date</label>
-          <input type="date" id="tDate">
-        </div>
-        <div class="panel todo reveal" aria-live="polite">
-          <span class="when" id="todoWhen">1 to 3 months before</span>
-          <h3 id="todoTitle">Sort your travel documents</h3>
-          <ul id="todoList"></ul>
-        </div>
+<main id="main-content" class="planning-page">
+  <div class="wrap planning-intro"><span class="label">A little help getting ready</span><h1>Plan your Umrah</h1><p>You don’t need to work everything out at once.<br>Start with a few ideas, then find what could help with your trip.</p></div>
+  <section class="wrap planning-tips" aria-labelledby="tips-title">
+    <h2 id="tips-title">One step at a time</h2>
+    <div class="tip-card">
+      <div id="planning-tip" aria-live="polite"></div>
+      <div class="tip-controls"><span id="tip-count">Tip 1 of 3</span><div><button type="button" id="tip-prev" aria-label="Previous tip">←</button><button type="button" id="tip-next" aria-label="Next tip">→</button></div></div>
+    </div>
+  </section>
+  <section class="wrap planning-tool" aria-label="Find your planning essentials" id="planner" hidden>
+    <aside class="trip-summary" aria-labelledby="summary-title">
+      <span class="label">Your trip</span><h2 id="summary-title">A plan at your pace</h2>
+      <p id="trip-stage">A few answers will help us get started.</p>
+      <label for="trip-date">Know when you’re leaving? <span>(optional)</span></label>
+      <input type="date" id="trip-date" aria-describedby="date-help date-error">
+      <p id="date-help">You can leave this blank or change it later.</p>
+      <p id="date-error" role="status"></p>
+      <div class="trip-countdown" aria-live="polite"><strong id="trip-days">No rush</strong><span id="trip-days-label">Start with what you know.</span></div>
+      <p id="trip-focus"></p>
+    </aside>
+    <div class="question-panel">
+      <form id="planning-form" novalidate>
+        <p class="question-progress" id="question-progress">Question 1 of 3</p>
+        <div class="question-bars" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div id="question-fields"></div>
+        <p class="question-error" id="question-error" role="alert"></p>
+        <div class="question-actions"><button type="button" class="btn btn-ghost" id="question-back" hidden>Back</button><button type="submit" class="btn btn-gold" id="question-next">Continue →</button></div>
+        <p class="planning-note">No sign-up needed. Your answers stay on this page and aren’t saved when you leave.</p>
+      </form>
+      <div id="planning-results" hidden>
+        <span class="label">Chosen for your plans</span><h2 id="results-title" tabindex="-1">Three things that could help</h2>
+        <p class="results-intro">Based on your answers, these are a good place to start. Pick what’s useful to you—you don’t need all three.</p>
+        <div id="recommendations"></div>
+        <p class="planning-note">These are digital downloads to print or use as described on Etsy. Check each listing for the current price and full details.</p>
+        <div class="question-actions"><button type="button" class="btn btn-ghost" id="edit-answers">Change my answers</button><button type="button" class="text-button" id="start-again">Start again</button></div>
       </div>
     </div>
   </section>
-  <section aria-labelledby="deck-title" style="padding-top:20px">
-    <div class="wrap">
-      <div class="head reveal"><span class="label">Before and after your trip</span><h2 id="deck-title">Getting ready, step by step</h2><p>These examples cover the months, weeks and days before you leave, plus your return home. Use the arrows to move between them.</p></div>
-      <div class="deck reveal" id="deck" tabindex="0" aria-roledescription="carousel" aria-label="Umrah preparation stages">
-        <div class="track">
-        <article class="slide" aria-roledescription="slide" aria-label="1 of 4">
-          <div>
-            <span class="stage-no">01 · MONTHS BEFORE</span>
-            <h3>Start planning</h3>
-            <p class="who">Example: <b>Raheema</b> flies on <b data-offset="182">in 182 days</b></p>
-            <p class="why">Start with your budget, travel plans and learning the steps of Umrah.</p>
-          </div>
-          <ul><li>Set a budget and save a little every month</li><li>Check your passport has at least six months left on your return date</li><li>Compare licensed travel agents and read their reviews</li><li>Start learning the steps of Umrah and their duas, a few at a time</li><li>Build up your walking gradually</li></ul>
-        </article>
-        <article class="slide" aria-roledescription="slide" aria-label="2 of 4">
-          <div>
-            <span class="stage-no">02 · WEEKS BEFORE</span>
-            <h3>Sort your travel documents</h3>
-            <p class="who">Example: <b>Raheema</b> flies on <b data-offset="42">in 42 days</b></p>
-            <p class="why">Check your travel documents, health requirements and bookings well before you leave.</p>
-          </div>
-          <ul><li>Apply for the visa and check your permits</li><li>See your GP or a travel clinic about vaccinations</li><li>Book flights and hotels, and note them in one place</li><li>Buy ihram, a belt and sandals</li><li>Write down your intention before life gets busy</li></ul>
-        </article>
-        <article class="slide" aria-roledescription="slide" aria-label="3 of 4">
-          <div>
-            <span class="stage-no">03 · DAYS BEFORE</span>
-            <h3>Pack and prepare</h3>
-            <p class="who">Example: <b>Raheema</b> flies on <b data-offset="6">in 6 days</b></p>
-            <p class="why">In the final few days, check your packing and keep your travel documents easy to find.</p>
-          </div>
-          <ul><li>Pack using the checklist and tick as you go</li><li>Print documents and keep copies on your phone</li><li>Ask family and friends what they'd like you to pray for</li><li>Prepare for ihram and charge your phone and power bank</li><li>Put your ihram in your hand luggage</li></ul>
-        </article>
-        <article class="slide" aria-roledescription="slide" aria-label="4 of 4">
-          <div>
-            <span class="stage-no">04 · HOME AGAIN</span>
-            <h3>When you get home</h3>
-            <p class="who">Example: <b>Raheema</b> returned home on <b data-offset="-3">3 days ago</b></p>
-            <p class="why">Take time to rest, reflect on your trip and stay in touch with the people you travelled with.</p>
-          </div>
-          <ul><li>Rest and spend time with family</li><li>Share your experiences with the people close to you</li><li>Write down the moments you want to remember</li><li>Think about the good habits you want to continue</li><li>Make dua for the people who made dua for you</li></ul>
-        </article>
-        </div>
-        <div class="deck-nav">
-          <div class="dots"><button class="dot" aria-label="Show stage 1"></button><button class="dot" aria-label="Show stage 2"></button><button class="dot" aria-label="Show stage 3"></button><button class="dot" aria-label="Show stage 4"></button></div>
-          <div class="arrows"><button data-prev aria-label="Previous stage">←</button><button data-next aria-label="Next stage">→</button></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-  <div class="wrap next-page"><span class="label">Next</span><a href="/packages">Umrah kits →</a></div>
+  <noscript><div class="wrap planning-fallback"><p>Turn on JavaScript to use the questions and countdown, or <a href="/shop">browse our planners in the shop</a>.</p></div></noscript>
 </main>
 <footer class="simple-footer"><div class="wrap">
   <a class="footer-name" href="/">Niyyah <span>With intention.</span></a>
@@ -143,6 +112,6 @@
 </div></footer>
 <script src="assets/ui.js"></script>
 <script src="assets/sky.js?v=20261030-copy"></script>
-<script src="assets/plan.js?v=20261030-copy"></script>
+<script src="assets/plan.js?v=20261030-planner"></script>
 </body>
 </html>

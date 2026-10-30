@@ -1,57 +1,96 @@
-/* ---------- plan page: countdown with stage-aware advice, and the example-journeys slideshow ---------- */
+/* Recommendations use current individual planning products, never overlapping bundles. */
 (() => {
-  const fmt = d => d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'long', year: 'numeric' });
-
-  // ----- countdown -----
-  const inp = document.getElementById('tDate');
-  if (inp) {
-    const big = document.getElementById('daysLeft'), unit = document.getElementById('daysUnit');
-    const when = document.getElementById('todoWhen'), title = document.getElementById('todoTitle'), list = document.getElementById('todoList');
-    const plan = [
-      { min: 90, when: '3 months or more before', title: 'Start planning',
-        items: ['Set a budget and start saving', 'Check your passport has 6+ months left on your return date', 'Choose a licensed, well-reviewed travel agent', 'Start learning the steps of Umrah and their duas', 'Build up your walking gradually'] },
-      { min: 35, when: '1 to 3 months before', title: 'Sort your travel documents',
-        items: ['Apply for your visa', 'Check vaccinations with your GP or a travel clinic', 'Book flights and hotels', 'Buy travel insurance', 'Plan your days in Makkah and Madinah'] },
-      { min: 8, when: '1 to 5 weeks before', title: 'Gather what you need',
-        items: ['Buy ihram, a belt and sandals', 'Download the Nusuk app and check your permits', 'If ordering gifts, check the estimated delivery date', 'Ask family and friends what to pray for', 'Print documents and save copies on your phone'] },
-      { min: 0, when: 'The final week', title: 'Pack and prepare',
-        items: ['Pack your bag and check your list', 'Cut nails, trim and wash before ihram', 'Charge your phone and power bank', 'Put your ihram in your hand luggage', 'Check your flight time and your miqat point'] }];
-    const d0 = new Date(); d0.setDate(d0.getDate() + 56); inp.value = d0.toISOString().slice(0, 10);
-    inp.min = new Date().toISOString().slice(0, 10);
-    let shown = 0;
-    function upd() {
-      const t = new Date(inp.value + 'T12:00:00'); if (isNaN(t)) return;
-      const today = new Date(); today.setHours(12, 0, 0, 0); const days = Math.max(0, Math.round((t - today) / 864e5));
-      const from = shown, to = days, st = performance.now();
-      (function anim(now) { const k = Math.min(1, (now - st) / 700); big.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); if (k < 1 && !reduce) requestAnimationFrame(anim); else big.textContent = to; })(st);
-      shown = days; unit.textContent = days === 1 ? 'day to go' : 'days to go';
-      const p = plan.find(x => days >= x.min) || plan[plan.length - 1];
-      when.textContent = p.when; title.textContent = p.title; list.innerHTML = '';
-      p.items.forEach(s => { const li = document.createElement('li'); li.textContent = s; list.appendChild(li); });
-    }
-    inp.addEventListener('input', upd); upd();
+  const products = {
+    budget: {name:'Umrah Budget Planner', image:'budget.jpg', url:'4603861064', why:'Plan your costs, keep track of savings and record spending during your trip.'},
+    itinerary: {name:'Umrah Itinerary Planner', image:'itinerary.jpg', url:'4603839913', why:'Keep your flights, hotels, contacts and daily plans together.'},
+    checklist: {name:'Umrah Packing Checklist', image:'checklist.jpg', url:'4603511710', why:'Work through your packing list so you can see what is ready and what is still needed.'},
+    journal: {name:'Umrah Journal', image:'journal.jpg', url:'4603560523', why:'Keep a list of duas for loved ones and write down your experiences and reflections.'}
+  };
+  const questions = [
+    {title:'Where are you with your plans?', choices:[['exploring','I’m still exploring'],['planning','I’m planning my dates'],['booked','My trip is booked']]},
+    {title:'What would help you most?', choices:[['budget','Managing my costs'],['itinerary','Organising my trip'],['checklist','Knowing what to pack']]},
+    {title:'What else matters to you?', choices:[['details','Keeping important details together'],['reflection','Making time for duas and reflection'],['prepared','Feeling prepared before I leave']]}
+  ];
+  function recommend(answers) {
+    if (answers.length !== 3 || answers.some((a,i) => !questions[i].choices.some(c => c[0] === a))) return [];
+    const scores = {budget:0,itinerary:1,checklist:0,journal:0};
+    scores[{exploring:'budget',planning:'itinerary',booked:'checklist'}[answers[0]]] += 2;
+    scores[answers[1]] += 10;
+    scores[{details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]]] += 6;
+    return Object.keys(products).sort((a,b) => scores[b]-scores[a]).slice(0,3);
   }
-
-  // ----- example dates on the slides -----
-  document.querySelectorAll('[data-offset]').forEach(el => { const d = new Date(); d.setDate(d.getDate() + +el.dataset.offset); el.textContent = fmt(d); });
-
-  // ----- visitor-controlled preparation slides -----
-  const deck = document.getElementById('deck');
-  if (deck) {
-    const track = deck.querySelector('.track'), slides = [...deck.querySelectorAll('.slide')], dots = [...deck.querySelectorAll('.dot')];
-    const prev = deck.querySelector('[data-prev]'), next = deck.querySelector('[data-next]');
-    let i = 0;
-    function go(n) {
-      i = (n + slides.length) % slides.length;
-      track.style.transform = `translateX(${-100 * i}%)`;
-      slides.forEach((s, k) => { s.setAttribute('aria-hidden', k !== i); s.inert = k !== i; });
-      dots.forEach((d, k) => d.setAttribute('aria-current', k === i));
-    }
-    prev.addEventListener('click', () => go(i - 1)); next.addEventListener('click', () => go(i + 1));
-    dots.forEach((d, k) => d.addEventListener('click', () => go(k)));
-    deck.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') go(i - 1); if (e.key === 'ArrowRight') go(i + 1); });
-    let sx = null; track.addEventListener('pointerdown', e => { sx = e.clientX; });
-    track.addEventListener('pointerup', e => { if (sx !== null && Math.abs(e.clientX - sx) > 40) go(i + (e.clientX < sx ? 1 : -1)); sx = null; });
-    go(0); // Manual navigation gives visitors time to read each stage.
+  function daysUntil(value, today = new Date()) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+    const [y,m,d] = value.split('-').map(Number);
+    const day = new Date(Date.UTC(y,m-1,d));
+    if (day.getUTCFullYear() !== y || day.getUTCMonth() !== m-1 || day.getUTCDate() !== d) return null;
+    return Math.round((day.getTime()-Date.UTC(today.getFullYear(),today.getMonth(),today.getDate()))/86400000);
   }
+  if (typeof module !== 'undefined' && module.exports) module.exports = {recommend,daysUntil,questions,products};
+  if (typeof document === 'undefined') return;
+  const form = document.getElementById('planning-form'); if (!form) return;
+  const byId = id => document.getElementById(id);
+  let step = 0, answers = [null,null,null], tipIndex = 0;
+  const tips = [
+    ['Start with your budget','Write down the main costs first: travel, accommodation and everyday spending. A rough plan is enough to get started.','budget'],
+    ['Keep your plans together','Put your flight details, hotel bookings and important contacts in one place, so they’re easy to find when you need them.','itinerary'],
+    ['Pack a little at a time','Make a list, gather what you already have, and tick things off as you pack. You don’t need to do it all in one day.','checklist']
+  ];
+  function showTip() {
+    const [title,body,key] = tips[tipIndex], product = products[key];
+    byId('planning-tip').innerHTML = `<h3>${title}</h3><p>${body}</p><a href="https://www.etsy.com/uk/listing/${product.url}" target="_blank" rel="noopener">View the ${product.name} on Etsy ↗</a>`;
+    byId('tip-count').textContent = `Tip ${tipIndex+1} of 3`;
+  }
+  byId('tip-prev').addEventListener('click',()=>{tipIndex=(tipIndex+2)%3;showTip();});
+  byId('tip-next').addEventListener('click',()=>{tipIndex=(tipIndex+1)%3;showTip();});
+  byId('question-fields').innerHTML = questions.map((q,i)=>`<fieldset data-question="${i}" ${i?'hidden':''}><legend tabindex="-1">${q.title}</legend><p class="choice-hint">Choose the answer that feels closest.</p><div class="planning-choices">${q.choices.map(([value,label])=>`<label><input type="radio" name="q${i}" value="${value}"><span>${label}</span></label>`).join('')}</div></fieldset>`).join('');
+  function showQuestion(focus = true) {
+    form.hidden=false; byId('planning-results').hidden=true;
+    document.querySelectorAll('[data-question]').forEach((el,i)=>{el.hidden=i!==step;});
+    byId('question-progress').textContent=`Question ${step+1} of 3`;
+    document.querySelectorAll('.question-bars i').forEach((el,i)=>el.classList.toggle('complete',i<=step));
+    byId('question-back').hidden=step===0;
+    byId('question-next').textContent=step===2?'See my suggestions →':'Continue →';
+    byId('question-error').textContent='';
+    if(focus) document.querySelector(`[data-question="${step}"] legend`).focus();
+  }
+  function updateSummary() {
+    byId('trip-stage').textContent = answers[0] ? {exploring:'You’re exploring your options.',planning:'You’re working out your travel plans.',booked:'Your trip is booked. Time to get ready.'}[answers[0]] : 'A few answers will help us get started.';
+    byId('trip-focus').textContent = answers[1] ? `Your main focus: ${{budget:'managing costs',itinerary:'organising your trip',checklist:'packing with confidence'}[answers[1]]}.` : '';
+  }
+  form.addEventListener('change',event=>{
+    if(!event.target.matches('input[type="radio"]'))return;
+    answers[Number(event.target.name.slice(1))]=event.target.value;
+    byId('question-error').textContent=''; updateSummary();
+  });
+  form.addEventListener('submit',event=>{
+    event.preventDefault();
+    if(!answers[step]) {byId('question-error').textContent='Choose one answer to continue.';document.querySelector(`[name="q${step}"]`).focus();return;}
+    if(step<2){step++;showQuestion();return;}
+    const selection = recommend(answers);
+    byId('recommendations').innerHTML=selection.map((key,i)=>{
+      const p=products[key];
+      const match = key===answers[1] ? 'For your main focus' : key==={details:'itinerary',reflection:'journal',prepared:'checklist'}[answers[2]] ? 'For what matters to you' : 'To help you prepare';
+      return `<article class="planning-product"><img src="img/${p.image}" alt="${p.name}" width="160" height="120"><div><span class="match-label">${match}</span><h3>${p.name}</h3><p>${p.why}</p><a href="https://www.etsy.com/uk/listing/${p.url}" target="_blank" rel="noopener">View on Etsy ↗</a></div></article>`;
+    }).join('');
+    form.hidden=true;byId('planning-results').hidden=false;byId('results-title').focus();
+  });
+  byId('question-back').addEventListener('click',()=>{step--;showQuestion();});
+  byId('edit-answers').addEventListener('click',()=>{step=0;showQuestion();});
+  const dateInput=byId('trip-date');
+  const now=new Date();dateInput.min=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+  function updateCountdown(){
+    const days=daysUntil(dateInput.value),error=byId('date-error');
+    error.textContent='';dateInput.removeAttribute('aria-invalid');
+    if(days===null||days<0){
+      byId('trip-days').textContent='No rush';byId('trip-days-label').textContent='Start with what you know.';
+      if(dateInput.value||dateInput.validity.badInput){error.textContent='Choose today or a future departure date.';dateInput.setAttribute('aria-invalid','true');}
+    }else{
+      byId('trip-days').textContent=days===0?'Today':String(days);
+      byId('trip-days-label').textContent=days===0?'Your journey starts today.':days===1?'day until you leave':'days until you leave';
+    }
+  }
+  dateInput.addEventListener('input',updateCountdown);
+  byId('start-again').addEventListener('click',()=>{answers=[null,null,null];step=0;form.reset();dateInput.value='';updateSummary();updateCountdown();showQuestion();});
+  showTip();showQuestion(false);byId('planner').hidden=false;
 })();
