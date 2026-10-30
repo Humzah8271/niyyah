@@ -1,4 +1,4 @@
-/* Fixed-height crossfades: scrolling and hovering never pause the clock. */
+/* Fixed-height sequential fades: scrolling and hovering never pause the clock. */
 (() => {
   const section = document.querySelector('.page-reminder');
   if (!section) return;
