@@ -589,3 +589,6 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .planning-intro p{margin:0;max-width:52ch}
 .planning-tips{max-width:var(--max)}
 @media(max-width:700px){.name-block .big-ar{font-size:3rem;justify-self:start;line-height:1.8}.name-block{gap:16px}}
+
+.star-buy-title{display:flex;align-items:center;gap:12px;max-width:1060px;margin:0 auto 20px;color:var(--gold-hi);font:400 1.7rem/1.25 var(--display)}
+.star-buy-title svg{width:30px;height:30px;flex:none;color:var(--gold)}
