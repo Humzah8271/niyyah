@@ -592,3 +592,11 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 
 .star-buy-title{display:flex;align-items:center;gap:12px;max-width:1060px;margin:0 auto 20px;color:var(--gold-hi);font:400 1.7rem/1.25 var(--display)}
 .star-buy-title svg{width:30px;height:30px;flex:none;color:var(--gold)}
+
+/* A quiet gold surround distinguishes the featured bundle from the catalogue. */
+.star-buy-frame{position:relative;padding:clamp(20px,3.2vw,40px);border-radius:28px;background:radial-gradient(ellipse at 12% 0%,rgba(255,247,219,.65),transparent 60%),linear-gradient(120deg,#c5a66d,#e8d5a5 52%,#bd9c62);border:1px solid #f0dfb5;box-shadow:0 20px 65px -35px rgba(214,180,114,.35);isolation:isolate}
+.star-buy-frame::before{content:'';position:absolute;inset:8px;border:1px solid rgba(77,59,24,.18);border-radius:21px;pointer-events:none;z-index:-1}
+.star-buy-frame .star-buy-title{max-width:none;margin:0 0 24px;color:#203a2e;font-size:2rem;gap:14px}
+.star-buy-frame .star-buy-title svg{width:38px;height:38px;color:#4d542e}
+.shop-feature .star-buy-frame .card{max-width:none;border-color:rgba(22,43,32,.6);box-shadow:0 12px 30px rgba(37,31,16,.13);border-radius:18px}
+@media(max-width:600px){.star-buy-frame{padding:20px 14px 14px;border-radius:23px}.star-buy-frame::before{inset:6px;border-radius:18px}.star-buy-frame .star-buy-title{font-size:1.75rem;margin:0 6px 18px;gap:10px}.star-buy-frame .star-buy-title svg{width:32px;height:32px}.shop-feature .star-buy-frame .card{border-radius:14px}}
