@@ -46,17 +46,13 @@
     byId('planning-tip').getAnimations().forEach(a=>a.cancel());
     if(!motion.matches) byId('planning-tip').animate([{opacity:0,transform:'translateY(5px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,easing:'ease-out'});tipElapsed=0;byId('tip-timer-fill').style.transform='scaleX(0)';
   }
-  byId('tip-prev').addEventListener('click',()=>{tipIndex=(tipIndex+2)%3;showTip();});
-  byId('tip-next').addEventListener('click',()=>{tipIndex=(tipIndex+1)%3;showTip();});
-  function syncTips(){byId('tip-toggle').textContent=tipsPaused?'▶':'Ⅱ';byId('tip-toggle').setAttribute('aria-label',tipsPaused?'Play tips':'Pause tips');}
-  byId('tip-toggle').addEventListener('click',()=>{tipsPaused=!tipsPaused;syncTips();});
-  motion.addEventListener('change',()=>{tipsPaused=motion.matches;syncTips();});
+  motion.addEventListener('change',()=>{tipsPaused=motion.matches;});
   function tickTips(now){const elapsed=now-tipLast;tipLast=now;
     if(!tipsPaused)tipElapsed+=elapsed;
     if(tipElapsed>=8500){const remainder=tipElapsed%8500;tipIndex=(tipIndex+Math.floor(tipElapsed/8500))%tips.length;showTip();tipElapsed=remainder;}
     byId('tip-timer-fill').style.transform=`scaleX(${Math.min(1,tipElapsed/8500)})`;requestAnimationFrame(tickTips);
   }
-  syncTips();requestAnimationFrame(tickTips);
+  requestAnimationFrame(tickTips);
   byId('question-fields').innerHTML = questions.map((q,i)=>`<fieldset data-question="${i}" ${i?'hidden':''}><legend tabindex="-1">${q.title}</legend><p class="choice-hint">Choose one to move to the next question.</p><div class="planning-choices">${q.choices.map(([value,label])=>`<label><input type="radio" name="q${i}" value="${value}"><span>${label}</span></label>`).join('')}</div></fieldset>`).join('');
   function showQuestion(focus = true) {
     form.hidden=false; byId('planning-results').hidden=true;

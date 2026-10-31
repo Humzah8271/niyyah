@@ -84,7 +84,7 @@ function niyyahStudio() {
   const base = new THREE.Mesh(new THREE.CircleGeometry(1, 64), white); base.rotation.x = Math.PI / 2; base.position.y = -1.15; mug.add(base);
   const handle = new THREE.Mesh(new THREE.TorusGeometry(.5, .12, 24, 64, Math.PI * 1.1), white);
   handle.rotation.z = -Math.PI / 2 - Math.PI * .05; handle.position.set(1.0, .02, 0); handle.scale.set(1, 1.15, 1); mug.add(handle);
-  mug.position.y = -.2; scene.add(mug);
+  mug.position.y = .15; scene.add(mug);
 
   // ---------- tote (simpler) ----------
   const toteCv = document.createElement('canvas'); toteCv.width = 1024; toteCv.height = 1176;
@@ -130,7 +130,7 @@ function niyyahStudio() {
       yaw += vy * dt; pitch += vp * dt;
     }
     obj.rotation.set(pitch, yaw, 0, 'XYZ');
-    obj.position.y = (current === 'mug' ? -.2 : -.35) + (reduce ? 0 : Math.sin(t * 1.4) * .035);
+    obj.position.y = (current === 'mug' ? .15 : -.35) + (reduce ? 0 : Math.sin(t * 1.4) * .035);
     if (current === 'mug') { // sit the shadow just under the lowest point of the tilted mug
       const c = Math.cos(pitch), sn = Math.abs(Math.sin(pitch));
       shadow.position.y = obj.position.y - (1.15 * c + sn) - .02; shadow.scale.set(.72, .8 + sn * .6, 1); shadow.material.opacity = .85 - sn * .5;

@@ -3,7 +3,7 @@
   const f = document.getElementById('contactForm'); if (!f) return;
   const st = f.querySelector('.cf-status'), btn = f.querySelector('button');
   const topic = document.getElementById('cTopic'), message = document.getElementById('cMsg');
-  const groupTemplate = 'Hello Niyyah,\n\nI’m interested in an order for a group.\n\nProducts we are interested in: [please fill in]\nNumber of people / items: [please fill in]\nDate needed: [please fill in]\nTravel date, if known: [please fill in]\nPersonalisation required: [names or other details]\nDelivery town and postcode: [please fill in]\nBudget, if known: [please fill in]\n\nOther questions: [add anything else here]';
+  const groupTemplate = 'السلام عليكم ورحمة الله وبركاته،\n\nI’m interested in an order for a group.\n\nProducts we are interested in: [please fill in]\nNumber of people / items: [please fill in]\nDate needed: [please fill in]\nTravel date, if known: [please fill in]\nPersonalisation required: [names or other details]\nDelivery town and postcode: [please fill in]\nBudget, if known: [please fill in]\n\nOther questions: [add anything else here]';
   let previousTopic = topic.value;
   const drafts = new Map();
   function updateTopic() {
