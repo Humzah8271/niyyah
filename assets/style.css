@@ -580,3 +580,12 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
   #groups .split{gap:24px}
 }
 @media(prefers-reduced-motion:reduce){.reminder-slide{transition:none}.shooting-star{display:none}.js .reveal.pre{opacity:1}}
+
+/* Arabic diacritics need room above and below the letterforms. */
+.name-block .big-ar{display:block;font-size:clamp(3rem,6vw,4.5rem);line-height:1.9;padding-block:.1em;align-self:center}
+.planning-page{max-width:none}
+.planning-intro{text-align:left;padding-top:clamp(70px,10vw,120px)}
+.planning-intro h1{font-size:clamp(2.8rem,6.5vw,5.2rem);margin:18px 0}
+.planning-intro p{margin:0;max-width:52ch}
+.planning-tips{max-width:var(--max)}
+@media(max-width:700px){.name-block .big-ar{font-size:3rem;justify-self:start;line-height:1.8}.name-block{gap:16px}}
