@@ -13,7 +13,7 @@
     setTimeout(function(){
       el.classList.remove('on');
       setTimeout(function(){ el.remove(); }, reduce?0:700);
-    }, 4300);
+    }, 3000);
   }
   if(document.readyState==='complete') setTimeout(show,150);
   else window.addEventListener('load',function(){ setTimeout(show,150); });
