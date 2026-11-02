@@ -600,3 +600,17 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 .star-buy-frame .star-buy-title svg{width:38px;height:38px;color:#4d542e}
 .shop-feature .star-buy-frame .card{max-width:none;border-color:rgba(22,43,32,.6);box-shadow:0 12px 30px rgba(37,31,16,.13);border-radius:18px}
 @media(max-width:600px){.star-buy-frame{padding:20px 14px 14px;border-radius:23px}.star-buy-frame::before{inset:6px;border-radius:18px}.star-buy-frame .star-buy-title{font-size:1.75rem;margin:0 6px 18px;gap:10px}.star-buy-frame .star-buy-title svg{width:32px;height:32px}.shop-feature .star-buy-frame .card{border-radius:14px}}
+
+/* 2026-11-02: welcome is the H1, tagline sits under it */
+.home-tagline{font-family:var(--display);font-style:italic;font-weight:300;color:var(--gold);font-size:clamp(1.3rem,2.6vw,1.75rem);line-height:1.4;margin:14px auto 0;max-width:30ch;text-wrap:balance}
+.home-welcome{margin-top:24px}
+@media(max-width:600px){.home-tagline{font-size:1.2rem;margin-top:10px}.home h1{max-width:none}}
+
+/* salaam greeting card: small, centred, auto-fades, no close button */
+.salaam{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:rgba(6,11,9,.55);opacity:0;transition:opacity .6s ease;pointer-events:none}
+.salaam.on{opacity:1}
+.salaam-card{max-width:min(86vw,420px);padding:22px 26px;border:1px solid var(--edge);border-radius:18px;background:rgba(15,30,25,.94);text-align:center;box-shadow:0 20px 60px -20px rgba(0,0,0,.7);transform:translateY(6px);transition:transform .6s ease}
+.salaam.on .salaam-card{transform:none}
+.salaam-card .ar-text{font-size:clamp(1.35rem,5vw,1.8rem);line-height:1.8;color:var(--gold-hi);margin:0}
+.salaam-card p+p{margin:6px 0 0;color:var(--muted);font-size:.85rem;line-height:1.6;font-style:italic}
+@media (prefers-reduced-motion:reduce){.salaam,.salaam-card{transition:none}}
