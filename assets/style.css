@@ -607,10 +607,11 @@ footer{border-top:1px solid var(--edge);background:linear-gradient(180deg,transp
 @media(max-width:600px){.home-tagline{font-size:1.2rem;margin-top:10px}.home h1{max-width:none}}
 
 /* salaam greeting card: small, centred, auto-fades, no close button */
-.salaam{position:fixed;inset:0;z-index:90;display:grid;place-items:center;background:rgba(6,11,9,.55);opacity:0;transition:opacity .6s ease;pointer-events:none}
+.salaam{position:fixed;inset:0;z-index:90;display:flex;justify-content:center;align-items:flex-start;padding:max(14px,env(safe-area-inset-top,0px)) 16px 0;background:rgba(6,11,9,.55);opacity:0;transition:opacity .6s ease;pointer-events:none}
 .salaam.on{opacity:1}
-.salaam-card{max-width:min(86vw,420px);padding:22px 26px;border:1px solid var(--edge);border-radius:18px;background:rgba(15,30,25,.94);text-align:center;box-shadow:0 20px 60px -20px rgba(0,0,0,.7);transform:translateY(6px);transition:transform .6s ease}
+.salaam-card{width:min(100%,760px);min-height:33vh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:28px 26px;border:1px solid var(--edge);border-radius:22px;background:rgba(15,30,25,.96);text-align:center;box-shadow:0 24px 70px -20px rgba(0,0,0,.75);transform:translateY(-8px);transition:transform .6s ease}
 .salaam.on .salaam-card{transform:none}
-.salaam-card .ar-text{font-size:clamp(1.35rem,5vw,1.8rem);line-height:1.8;color:var(--gold-hi);margin:0}
-.salaam-card p+p{margin:6px 0 0;color:var(--muted);font-size:.85rem;line-height:1.6;font-style:italic}
+.salaam-card .ar-text{font-size:clamp(1.9rem,6.5vw,3.2rem);line-height:1.7;color:var(--gold-hi);margin:0}
+.salaam-card p+p{margin:10px auto 0;color:var(--text);font-size:clamp(.95rem,3.4vw,1.2rem);line-height:1.6;font-style:italic;max-width:34ch}
+.salaam-card .salaam-en{color:var(--muted);font-style:normal;font-size:clamp(.9rem,3.2vw,1.1rem);margin-top:10px}
 @media (prefers-reduced-motion:reduce){.salaam,.salaam-card{transition:none}}
