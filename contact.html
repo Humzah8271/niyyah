@@ -78,7 +78,7 @@
         <input type="hidden" name="_subject" value="New message from niyyahpackages.com">
         <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://niyyahpackages.com/contact?sent=1#contact">
+        <input type="hidden" name="_next" value="https://niyyahpackages.com/message-sent">
         <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="cf"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name"></div>
         <div class="cf"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email"></div>
@@ -105,6 +105,25 @@
         <div><dt>Coming</dt><dd>Group kits</dd></div>
         <div><dt>Send us</dt><dd>Numbers and travel date</dd></div>
       </dl>
+    </div>
+  </section>
+  <section id="notify" aria-labelledby="notify-title" style="padding-top:0">
+    <div class="wrap" style="max-width:640px">
+      <form class="contact notify-form reveal" action="https://formsubmit.co/niyyahpackages@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Kit launch list sign-up">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://niyyahpackages.com/message-sent?joined=1">
+        <input type="hidden" name="list" value="Kit launch list">
+        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <span class="label">Kit launch list</span>
+        <h2 id="notify-title" style="font-size:clamp(1.8rem,4vw,2.6rem)">Be the first to know</h2>
+        <p class="muted" style="margin:0">Leave your email and we’ll tell you when the Umrah kits launch. We may also send the occasional Umrah planning tip. No spam, and you can leave the list at any time.</p>
+        <div class="cf"><label for="nEmail">Email</label><input id="nEmail" name="email" type="email" required autocomplete="email"></div>
+        <p class="muted" style="font-size:.9rem;margin:0">By joining, you agree to receive these emails. Your sign-up is sent through FormSubmit to our inbox. To leave, reply “unsubscribe” to any email or contact <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a>. See our <a class="tlink" href="/privacy">privacy notice</a>.</p>
+        <button class="btn btn-gold" type="submit">Join the list</button>
+        <p class="cf-status notify-status" role="status" aria-live="polite"></p>
+      </form>
     </div>
   </section>
   <section id="faq" aria-labelledby="faq-title" style="padding-top:20px">
@@ -134,7 +153,7 @@
 </div></footer>
 <script src="assets/ui.js?v=20261030-motion6"></script>
 <script src="assets/sky.js?v=20261030-motion6"></script>
-<script src="assets/contact.js?v=20261031-details10"></script>
+<script src="assets/contact.js?v=20261103-thanks1"></script>
 <script src="assets/reminders.js?v=20261030-loop9"></script>
 </body>
 </html>

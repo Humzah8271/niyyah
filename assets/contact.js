@@ -26,7 +26,7 @@
       const r = await fetch(f.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(f) });
       const j = await r.json().catch(() => ({}));
       if (!r.ok || j.success === 'false' || j.success === false) throw new Error(j.message || 'failed');
-      f.reset(); drafts.clear();previousTopic=topic.value; st.textContent = 'Thank you, your message has been sent. We\'ll reply by email.';
+      location.href = '/message-sent'; return;
     } catch (err) { st.classList.add('err'); st.innerHTML = 'Sorry, that didn\'t send. Please email <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a>.'; }
     btn.disabled = false;
   });
