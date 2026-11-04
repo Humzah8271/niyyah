@@ -74,18 +74,18 @@
         <p class="muted" style="margin-top:18px;font-size:1.05rem;font-weight:300">Questions about an order or a product? We’re here to help. We usually reply within a day or two.</p>
         <p class="muted" style="margin-top:14px;font-size:.95rem">Or email <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a></p>
       </div>
-      <form class="contact reveal" id="contactForm" action="https://formsubmit.co/niyyahpackages@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="New message from niyyahpackages.com">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://niyyahpackages.com/message-sent">
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <form class="contact reveal" id="contactForm" action="https://api.web3forms.com/submit" method="POST" data-next="/message-sent">
+        <input type="hidden" name="access_key" value="WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="New message from niyyahpackages.com">
+        <input type="hidden" name="from_name" value="Niyyah website">
+        <input type="hidden" name="redirect" value="https://niyyahpackages.com/message-sent">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="cf"><label for="cName">Your name</label><input id="cName" name="name" required autocomplete="name"></div>
         <div class="cf"><label for="cEmail">Email</label><input id="cEmail" name="email" type="email" required autocomplete="email"></div>
         <div class="cf"><label for="cTopic">What is your message about?</label><select id="cTopic" name="topic">
           <option>A question</option><option>An order</option><option>Group order</option><option>Umrah or Hajj kits</option><option>Wholesale (mosque or travel agent)</option><option>Something else</option></select></div>
         <div class="cf"><label for="cMsg">Message</label><textarea id="cMsg" name="message" rows="5" required maxlength="3000"></textarea></div>
-        <p class="muted" style="font-size:.9rem">We use your details to reply. This form sends your message through FormSubmit to our email inbox. Read our <a class="tlink" href="/privacy">privacy notice</a>, including how these services handle information. You can also email us directly.</p>
+        <p class="muted" style="font-size:.9rem">We use your details to reply. This form sends your message through Web3Forms to our email inbox. Read our <a class="tlink" href="/privacy">privacy notice</a>, including how these services handle information. You can also email us directly.</p>
         <button class="btn btn-gold" type="submit">Send message</button>
         <p class="cf-status" role="status" aria-live="polite"></p>
       </form>
@@ -109,18 +109,18 @@
   </section>
   <section id="notify" aria-labelledby="notify-title" style="padding-top:0">
     <div class="wrap" style="max-width:640px">
-      <form class="contact notify-form reveal" action="https://formsubmit.co/niyyahpackages@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Kit launch list sign-up">
-        <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://niyyahpackages.com/message-sent?joined=1">
+      <form class="contact notify-form reveal" action="https://api.web3forms.com/submit" method="POST" data-next="/message-sent?joined=1">
+        <input type="hidden" name="access_key" value="WEB3FORMS_KEY">
+        <input type="hidden" name="subject" value="Kit launch list sign-up">
+        <input type="hidden" name="from_name" value="Niyyah website">
+        <input type="hidden" name="redirect" value="https://niyyahpackages.com/message-sent?joined=1">
         <input type="hidden" name="list" value="Kit launch list">
-        <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
         <span class="label">Kit launch list</span>
         <h2 id="notify-title" style="font-size:clamp(1.8rem,4vw,2.6rem)">Be the first to know</h2>
         <p class="muted" style="margin:0">Leave your email and we’ll tell you when the Umrah kits launch. We may also send the occasional Umrah planning tip. No spam, and you can leave the list at any time.</p>
         <div class="cf"><label for="nEmail">Email</label><input id="nEmail" name="email" type="email" required autocomplete="email"></div>
-        <p class="muted" style="font-size:.9rem;margin:0">By joining, you agree to receive these emails. Your sign-up is sent through FormSubmit to our inbox. To leave, reply “unsubscribe” to any email or contact <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a>. See our <a class="tlink" href="/privacy">privacy notice</a>.</p>
+        <p class="muted" style="font-size:.9rem;margin:0">By joining, you agree to receive these emails. Your sign-up is sent through Web3Forms to our inbox. To leave, reply “unsubscribe” to any email or contact <a class="tlink" href="mailto:support@niyyahpackages.com">support@niyyahpackages.com</a>. See our <a class="tlink" href="/privacy">privacy notice</a>.</p>
         <button class="btn btn-gold" type="submit">Join the list</button>
         <p class="cf-status notify-status" role="status" aria-live="polite"></p>
       </form>
@@ -153,7 +153,7 @@
 </div></footer>
 <script src="assets/ui.js?v=20261030-motion6"></script>
 <script src="assets/sky.js?v=20261030-motion6"></script>
-<script src="assets/contact.js?v=20261103-thanks1"></script>
+<script src="assets/contact.js?v=20261104-web3forms1"></script>
 <script src="assets/reminders.js?v=20261030-loop9"></script>
 </body>
 </html>
