@@ -36,29 +36,4 @@ if (typeof module !== 'undefined' && module.exports) module.exports = {reminderF
   motion.addEventListener('change', () => {last = performance.now();});
   requestAnimationFrame(draw);
 
-  // One shared minute clock across page navigation in this browser tab.
-  let started = Date.now();
-  try {
-    const stored = Number(sessionStorage.getItem('niyyah-sky-start'));
-    if (stored > 0 && stored <= started) started = stored;
-    else sessionStorage.setItem('niyyah-sky-start', String(started));
-  } catch (_) { /* A per-page clock still works if storage is unavailable. */ }
-  let minute = Math.floor((Date.now() - started) / 60000);
-  setInterval(() => {
-    const current = Math.floor((Date.now() - started) / 60000);
-    if (current <= minute) return;
-    minute = current;
-    if (motion.matches || document.hidden) return;
-    const star = document.createElement('i');
-    star.className = 'shooting-star'; star.setAttribute('aria-hidden', 'true');
-    star.style.left = `${10 + Math.random() * 45}%`;
-    star.style.top = `${58 + Math.random() * 15}%`;
-    section.appendChild(star);
-    const flight = star.animate([
-      {opacity:0, transform:'translate(-40px, 25px) rotate(-24deg)'},
-      {opacity:.28, offset:.3},
-      {opacity:0, transform:'translate(140px, -55px) rotate(-24deg)'}
-    ], {duration:2300,easing:'ease-out'});
-    flight.onfinish = () => star.remove();
-  }, 250);
 })();

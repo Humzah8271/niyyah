@@ -46,3 +46,48 @@
   motion.addEventListener('change', restart);
   restart();
 })();
+
+/* Shooting stars across the whole site. Each star repeats every 60 seconds, and each
+   has its own fixed start offset so they never all appear together. The clock is shared
+   across pages in this tab, so moving between pages doesn't reset the rhythm. */
+(() => {
+  if (typeof document === 'undefined' || !document.body) return;
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const PERIOD = 60000, COUNT = 5;
+  let started = Date.now();
+  try {
+    const stored = Number(sessionStorage.getItem('niyyah-sky-start'));
+    if (stored > 0 && stored <= started) started = stored;
+    else sessionStorage.setItem('niyyah-sky-start', String(started));
+  } catch (_) { /* Without storage, each page keeps its own clock. */ }
+  // Offsets spread through the minute (about 12 s apart) with a little variation, fixed for the visit.
+  let seed = started % 2147483647 || 1;
+  const rand = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const offsets = Array.from({length:COUNT}, (_, i) => i * (PERIOD / COUNT) + rand() * 7000 + 2000);
+  const layer = document.createElement('div');
+  layer.className = 'star-layer'; layer.setAttribute('aria-hidden', 'true');
+  document.body.prepend(layer);
+  const cycle = i => Math.floor((Date.now() - started - offsets[i]) / PERIOD);
+  const seen = offsets.map((_, i) => cycle(i));
+  function fly() {
+    const star = document.createElement('i');
+    star.className = 'shooting-star';
+    star.style.left = `${5 + Math.random() * 75}%`;
+    star.style.top = `${6 + Math.random() * 70}%`;
+    layer.appendChild(star);
+    const flight = star.animate([
+      {opacity:0, transform:'translate(-40px, 25px) rotate(-24deg)'},
+      {opacity:.28, offset:.3},
+      {opacity:0, transform:'translate(140px, -55px) rotate(-24deg)'}
+    ], {duration:2300, easing:'ease-out'});
+    flight.onfinish = () => star.remove();
+  }
+  setInterval(() => {
+    offsets.forEach((_, i) => {
+      const c = cycle(i);
+      if (c <= seen[i]) return;
+      seen[i] = c;
+      if (!motion.matches && !document.hidden) fly();
+    });
+  }, 250);
+})();
