@@ -69,16 +69,25 @@
   document.body.prepend(layer);
   const cycle = i => Math.floor((Date.now() - started - offsets[i]) / PERIOD);
   const seen = offsets.map((_, i) => cycle(i));
+  // Each star takes its own direction, at least 60 degrees away from the one before.
+  let lastAngle = null;
+  function pickAngle() {
+    let angle = Math.random() * 360;
+    if (lastAngle !== null) angle = (lastAngle + 60 + Math.random() * 240) % 360;
+    return lastAngle = angle;
+  }
   function fly() {
     const star = document.createElement('i');
     star.className = 'shooting-star';
     star.style.left = `${5 + Math.random() * 75}%`;
     star.style.top = `${6 + Math.random() * 70}%`;
     layer.appendChild(star);
+    const angle = pickAngle(), rad = angle * Math.PI / 180;
+    const at = distance => `translate(${(Math.cos(rad) * distance).toFixed(1)}px, ${(Math.sin(rad) * distance).toFixed(1)}px) rotate(${angle.toFixed(1)}deg)`;
     const flight = star.animate([
-      {opacity:0, transform:'translate(-40px, 25px) rotate(-24deg)'},
+      {opacity:0, transform:at(-47)},
       {opacity:.28, offset:.3},
-      {opacity:0, transform:'translate(140px, -55px) rotate(-24deg)'}
+      {opacity:0, transform:at(150)}
     ], {duration:2300, easing:'ease-out'});
     flight.onfinish = () => star.remove();
   }
